@@ -4,8 +4,8 @@
 
 ## Requirements
 
-* phpBB 3.2.1+
-* PHP 7+
+* phpBB 3.2.3+
+* PHP 7.1+
 * The [Codemirror helper extension](https://github.com/marttiphpbb/phpbb-ext-codemirror)
 * Disabled PHP in templates
 

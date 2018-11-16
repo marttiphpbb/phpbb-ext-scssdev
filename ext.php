@@ -13,13 +13,13 @@ use marttiphpbb\themecolordev\model\themecolordev_directory;
 class ext extends base
 {
 	/**
-	 * phpBB 3.2.1+ and PHP 7+
+	 * phpBB 3.2.3+ and PHP 7.1+
 	 */
 	public function is_enableable()
 	{
 		$config = $this->container->get('config');
-		return phpbb_version_compare($config['version'], '3.2.1', '>=') && version_compare(PHP_VERSION, '7', '>=');
-	}	
+		return phpbb_version_compare($config['version'], '3.2.3', '>=') && version_compare(PHP_VERSION, '7.1', '>=');
+	}
 
 	function enable_step($old_state)
 	{
