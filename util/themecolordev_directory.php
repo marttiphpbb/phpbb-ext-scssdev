@@ -1,11 +1,11 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb scssthemedev
-* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
+* @copyright (c) 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\scssthemedev\model;
+namespace marttiphpbb\scssthemedev\util;
 
 use phpbb\language\language;
 use marttiphpbb\scssthemedev\util\cnst;
@@ -217,13 +217,13 @@ class scssthemedev_directory
 
 	public function create()
 	{
-		$this->language->add_lang('common', cnst::FOLDER);
+		$this->language->add_lang('acp', cnst::FOLDER);
 
 		$dir = $this->phpbb_root_path . cnst::DIR;
 
 		if (!file_exists($dir))
 		{
-			@mkdir($dir, 0777);
+			@mkdir($dir, 0777, true);
 			@chmod($dir, 0777);
 
 			if (!is_dir($dir))
