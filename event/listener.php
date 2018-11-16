@@ -15,8 +15,10 @@ use phpbb\template\twig\twig as template;
 use phpbb\user;
 use phpbb\language\language;
 use phpbb\template\twig\loader;
+use phpbb\extension\manager as ext_manager;
 use marttiphpbb\themecolordev\model\themecolordev_directory;
 use marttiphpbb\themecolordev\util\cnst;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
@@ -28,28 +30,26 @@ class listener implements EventSubscriberInterface
 	protected $user;
 	protected $language;
 	protected $loader;
+	protected $ext_manager;
+	protected $container;
 	protected $phpbb_root_path;
 	protected $php_ext;
 
 	public function __construct(
 		auth $auth,
-		config $config,
 		request $request,
-		template $template,
-		user $user,
-		language $language,
 		loader $loader,
+		ext_manager $ext_manager,
+		ContainerInterface $container,
 		string $phpbb_root_path,
 		string $php_ext
 	)
 	{
 		$this->auth = $auth;
-		$this->config = $config;
 		$this->request = $request;
-		$this->template = $template;
-		$this->user = $user;
-		$this->language = $language;
 		$this->loader = $loader;
+		$this->ext_manager = $ext_manager;
+		$this->container = $container;
 		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
 	}
@@ -58,7 +58,6 @@ class listener implements EventSubscriberInterface
 	{
 		return [
 			'core.page_header'		=> 'core_page_header',
-			'core.append_sid'		=> 'core_append_sid',
 			'core.twig_environment_render_template_before'
 				=> 'core_twig_environment_render_template_before',
 		];
@@ -66,120 +65,27 @@ class listener implements EventSubscriberInterface
 
 	public function core_page_header(event $event)
 	{
-		if ($this->config['tpl_allow_php'])
-		{
-			return;
-		}
-
 		$this->loader->addSafeDirectory($this->phpbb_root_path . cnst::DIR);
-		$this->template->assign_var('MARTTIPHPBB_THEMECOLORDEV_PATH', cnst::PATH . '/');
-	}
-
-	public function core_append_sid(event $event)
-	{
-		$url = $event['url'];
-		$params = $event['params'];
-
-		if (!$this->auth->acl_get('a_'))
+//		$this->template->assign_var('MARTTIPHPBB_THEMECOLORDEV_PATH', cnst::PATH . '/');
+		if ($this->ext_manager->is_enabled('marttiphpbb/codemirror'))
 		{
-			return;
-		}
-
-		if (strpos($url, './adm/index') === 0)
-		{
-			return;
-		}
-
-		if (is_string($params))
-		{
-			if (strpos($params, 'themecolordev_show_events=0') !== false)
-			{
-				return;
-			}
-		}
-
-		if ($this->request->variable('themecolordev_show_events', 0))
-		{
-			if (is_string($params))
-			{
-				if ($params !== '')
-				{
-					$params .= '&';
-				}
-
-				$params .= 'themecolordev_show_events=1';
-			}
-			else
-			{
-				if ($params === false)
-				{
-					$params = [];
-				}
-
-				$params['themecolordev_show_events'] = 1;
-			}
-
-			$event['params'] = $params;
+			$load = $this->container->get('marttiphpbb.codemirror.load');
+			$load->set_mode('scss');
 		}
 	}
 
 	public function core_twig_environment_render_template_before(event $event)
 	{
-		global $phpbb_admin_path; // core.admin_path doesn't seem to exist.
-
-		$context = $event['context'];
-		$tpl = [];
-
-		$show_events = $this->request->variable('themecolordev_show_events', 0) ? true : false;
-		$show_events = $show_events && $this->auth->acl_get('a_');
-		$show_events = $show_events && !$this->config['tpl_allow_php'];
-		$tpl['show_events'] = $show_events;
-
-		$query_string = $this->user->page['query_string'];
-		$query = [];
-		parse_str($query_string, $query);
-		$tpl['query'] = $query;
-
-		if (!$show_events)
+		if (!$this->auth->acl_get('a_'))
 		{
-			$context['marttiphpbb_themecolordev'] = $tpl;
-			$event['context'] = $context;
 			return;
 		}
 
-		$this->language->add_lang('common', 'marttiphpbb/themecolordev');
-
-		$page = $this->user->page['script_path'] . $this->user->page['page_name'];
-		$query_string = str_replace([
-			'&themecolordev_show_events=1',
-			'&themecolordev_show_events=0',
-		], '', $query_string);
-		$query_string = str_replace([
-			'themecolordev_show_events=1',
-			'themecolordev_show_events=0',
-		], '', $query_string);
-		$query_string = trim($query_string, '&');
-		$query_string .= $query_string ? '&' : '';
-
-		$u_edit_events = [];
-		$params = [
-			'i'			=> '-marttiphpbb-themecolordev-acp-main_module',
-			'mode'		=> 'edit',
+		$context = $event['context'];
+		$context['marttiphpbb_themecolordev'] = [
+			'enable'	=> true,
 		];
 
-		foreach (themecolordev_directory::TEMPLATE_EVENTS as $event_name => $str)
-		{
-			$params['filename'] = $event_name . '.html';
-
-			$u_edit_events[$event_name] = append_sid(
-				$phpbb_admin_path . 'index.' . $this->php_ext,
-				$params, true, $this->user->session_id);
-		}
-
-		$tpl['u_hide'] = append_sid($page, $query_string . 'themecolordev_show_events=0');
-		$tpl['u_edit_events'] = $u_edit_events;
-
-		$context['marttiphpbb_themecolordev'] = $tpl;
 		$event['context'] = $context;
 	}
 }

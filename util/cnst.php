@@ -9,7 +9,8 @@ namespace marttiphpbb\themecolordev\util;
 
 class cnst
 {
-	const DIR = 'store/themecolordev';
+	const BASE_DIR = 'store/marttiphpbb';
+	const DIR = 'themecolordev';
 	const FOLDER = 'marttiphpbb/themecolordev';
 	const ID = 'marttiphpbb_themecolordev';
 	const PREFIX = self::ID . '_';

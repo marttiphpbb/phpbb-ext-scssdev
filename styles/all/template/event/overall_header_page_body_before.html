@@ -1,5 +1,5 @@
-{%- embed '@marttiphpbb_themecolordev/event.html' -%}
-    {%- block event_name -%}
-        overall_header_page_body_before        
-    {%- endblock event_name -%}
-{%- endembed -%}
+{%- if marttiphpbb_themecolordev.enable -%}
+    <textarea name="content" id="content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
+        {{- marttiphpbb_themecolordev.content -}}
+    </textarea>
+{%- endif -%}

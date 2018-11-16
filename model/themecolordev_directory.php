@@ -242,31 +242,6 @@ class themecolordev_directory
 				'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_WRITE_FAIL'),
 				$filename), E_USER_WARNING);
 		}
-
-		foreach (self::TEMPLATE_EVENTS as $template_event => $content)
-		{
-			$filename = $dir . '/' . $template_event . self::FILE_EXTENSION;
-
-			if (!file_exists($filename))
-			{
-				if ($content === 'MARTTIPHPBB_THEMECOLORDEV_GITHUB_LINK')
-				{
-					$content = sprintf($this->language->lang($content),
-						'{# ',
-						" #}\r\n<br>",
-						'<a href="https://github.com/marttiphpbb/phpbb-ext-themecolordev">',
-						'</a>',
-						$template_event);
-				}
-
-				if (@file_put_contents($filename, $content) === false)
-				{
-					trigger_error(sprintf($this->language->lang(
-						'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_WRITE_FAIL'),
-						$filename), E_USER_WARNING);
-				}
-			}
-		}
 	}
 
 	public function remove()

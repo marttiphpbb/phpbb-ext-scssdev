@@ -3,14 +3,11 @@ services:
         class: marttiphpbb\themecolordev\event\listener
         arguments:
             - '@auth'
-            - '@config'
             - '@request'
-            - '@template'
-            - '@user'
-            - '@language'
             - '@template.twig.loader'
+            - '@ext.manager'
+            - '@service_container'
             - '%core.root_path%'
             - '%core.php_ext%'
         tags:
             - { name: event.listener }
-

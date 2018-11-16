@@ -14,7 +14,8 @@
 			"role": "Developer"
 		}],
 	"require": {
-		"php": ">=7.1"
+		"php": ">=7.1",
+		"leafo/scssphp": "^0.7.7"
 	},
 	"require-dev": {
 		"phpbb/epv": "dev-master"
