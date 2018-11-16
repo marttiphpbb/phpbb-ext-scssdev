@@ -2,6 +2,7 @@ services:
     marttiphpbb.scssthemedev.listener:
         class: marttiphpbb\scssthemedev\event\listener
         arguments:
+            - '@language'
             - '@auth'
             - '@request'
             - '@template.twig.loader'

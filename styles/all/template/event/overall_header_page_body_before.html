@@ -1,5 +1,9 @@
 {%- if marttiphpbb_scssthemedev.enable -%}
-    <textarea name="content" id="content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
+    <form method="post">
+    <textarea name="marttiphpbb-scssthemedev-content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
         {{- marttiphpbb_scssthemedev.content -}}
     </textarea>
+    <input type="hidden" name="marttiphpbb-scssthemedev-filename" value="{{- marttiphpbb_scssthemedev.filename -}}">
+    <input type="submit" name="marttiphpbb-scssthemedev-submit" value="{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
+    </form>
 {%- endif -%}

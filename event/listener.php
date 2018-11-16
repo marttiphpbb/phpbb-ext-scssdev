@@ -16,9 +16,10 @@ use phpbb\user;
 use phpbb\language\language;
 use phpbb\template\twig\loader;
 use phpbb\extension\manager as ext_manager;
-use marttiphpbb\scssthemedev\model\scssthemedev_directory;
+use marttiphpbb\scssthemedev\util\scssthemedev_directory;
 use marttiphpbb\scssthemedev\util\cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Leafo\ScssPhp\Compiler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
@@ -35,7 +36,10 @@ class listener implements EventSubscriberInterface
 	protected $phpbb_root_path;
 	protected $php_ext;
 
+	protected $scssthemedev_directory;
+
 	public function __construct(
+		language $language,
 		auth $auth,
 		request $request,
 		loader $loader,
@@ -45,6 +49,7 @@ class listener implements EventSubscriberInterface
 		string $php_ext
 	)
 	{
+		$this->language = $language;
 		$this->auth = $auth;
 		$this->request = $request;
 		$this->loader = $loader;
@@ -65,8 +70,31 @@ class listener implements EventSubscriberInterface
 
 	public function core_page_header(event $event)
 	{
+		if (!$this->auth->acl_get('a_'))
+		{
+			return;
+		}
+
+		$this->language->add_lang('common', cnst::FOLDER);
+		$this->scssthemedev_directory = new scssthemedev_directory($this->language, $this->phpbb_root_path);
+
+		if ($this->request->is_set_post('marttiphpbb-scssthemedev-submit'))
+		{
+			$filename = $this->request->variable('marttiphpbb-scssthemedev-filename', 'zzz.scss');
+			$content = $this->request->variable('marttiphpbb-scssthemedev-content', '', true);
+			$content = utf8_normalize_nfc($content);
+			$content = htmlspecialchars_decode($content);
+			$this->scssthemedev_directory->save_to_file($filename, $content);
+
+			$filename_compiled = pathinfo($filename, PATHINFO_FILENAME);
+			$filename_compiled .= '.css';
+			$scss = new Compiler();
+			$compiled = $scss->compile($content);
+			$this->scssthemedev_directory->save_to_file($filename_compiled, $compiled);
+		}
+
 		$this->loader->addSafeDirectory($this->phpbb_root_path . cnst::DIR);
-//		$this->template->assign_var('MARTTIPHPBB_SCSSTHEMEDEV_PATH', cnst::PATH . '/');
+
 		if ($this->ext_manager->is_enabled('marttiphpbb/codemirror'))
 		{
 			$load = $this->container->get('marttiphpbb.codemirror.load');
@@ -83,7 +111,11 @@ class listener implements EventSubscriberInterface
 
 		$context = $event['context'];
 		$context['marttiphpbb_scssthemedev'] = [
-			'enable'	=> true,
+			'enable'		=> true,
+			'path'			=> cnst::PATH,
+			'filename'		=> $this->filename ?? 'zzz.scss',
+			'content'		=> $this->content ?? '',
+			'filename_compiled'	=> '',
 		];
 
 		$event['context'] = $context;
