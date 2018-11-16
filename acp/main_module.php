@@ -1,14 +1,14 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb themecolordev
+* phpBB Extension - marttiphpbb scssthemedev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\themecolordev\acp;
+namespace marttiphpbb\scssthemedev\acp;
 
-use marttiphpbb\themecolordev\model\themecolordev_directory;
-use marttiphpbb\themecolordev\util\cnst;
+use marttiphpbb\scssthemedev\model\scssthemedev_directory;
+use marttiphpbb\scssthemedev\util\cnst;
 
 class main_module
 {
@@ -29,12 +29,12 @@ class main_module
 		$phpbb_root_path = $phpbb_container->getParameter('core.root_path');
 		$php_ext = $phpbb_container->getParameter('core.php_ext');
 
-		$language->add_lang('acp', 'marttiphpbb/themecolordev');
-		add_form_key('marttiphpbb/themecolordev');
+		$language->add_lang('acp', 'marttiphpbb/scssthemedev');
+		add_form_key('marttiphpbb/scssthemedev');
 
-		$themecolordev_directory = new themecolordev_directory($language, $phpbb_root_path);
+		$scssthemedev_directory = new scssthemedev_directory($language, $phpbb_root_path);
 
-		$filenames = $themecolordev_directory->get_filenames();
+		$filenames = $scssthemedev_directory->get_filenames();
 
 		if ($config['tpl_allow_php'])
 		{
@@ -70,7 +70,7 @@ class main_module
 
 					if (confirm_box(true))
 					{
-						$themecolordev_directory->save_to_file($file, $data);
+						$scssthemedev_directory->save_to_file($file, $data);
 
 						if ($save_purge_cache)
 						{
@@ -119,21 +119,21 @@ class main_module
 					$load->set_mode('html');
 				}				
 
-				$data = $themecolordev_directory->file_get_contents($file);
+				$data = $scssthemedev_directory->file_get_contents($file);
 
 				foreach($filenames as $filename)
 				{
 					$template->assign_block_vars('filenames', [
 						'NAME'			=> $filename,
 						'S_IS_SELECTED'	=> $filename === $file,
-						'S_IS_EVENT'	=> $themecolordev_directory->is_event($filename)
+						'S_IS_EVENT'	=> $scssthemedev_directory->is_event($filename)
 					]);					
 				}
 
 				$template->assign_vars([
 					'U_ACTION'				=> $this->u_action,
 					'FILENAME'				=> $file,
-					'S_IS_EVENT'			=> $themecolordev_directory->is_event($file),
+					'S_IS_EVENT'			=> $scssthemedev_directory->is_event($file),
 					'FILE_DATA'				=> utf8_htmlspecialchars($data),
 				]);
 
@@ -150,7 +150,7 @@ class main_module
 
 				if ($request->is_set_post('create'))
 				{
-					if (!check_form_key('marttiphpbb/themecolordev'))
+					if (!check_form_key('marttiphpbb/scssthemedev'))
 					{
 						trigger_error('FORM_INVALID');
 					}
@@ -170,7 +170,7 @@ class main_module
 							E_USER_WARNING);
 					}
 
-					$themecolordev_directory->create_file($new_file);
+					$scssthemedev_directory->create_file($new_file);
 
 					trigger_error(sprintf($language->lang(
 						cnst::L_ACP . '_FILE_CREATED'), 
@@ -189,7 +189,7 @@ class main_module
 
 					if (confirm_box(true))
 					{
-						$themecolordev_directory->delete_file($file_to_delete);
+						$scssthemedev_directory->delete_file($file_to_delete);
 
 						trigger_error(sprintf($language->lang(
 							cnst::L_ACP . '_FILE_DELETED'), 
@@ -213,22 +213,22 @@ class main_module
 				foreach ($filenames as $filename)
 				{
 					$template->assign_block_vars('files', [
-						'S_IS_EVENT'			=> $themecolordev_directory->is_event($filename),
+						'S_IS_EVENT'			=> $scssthemedev_directory->is_event($filename),
 						'NAME'					=> $filename,
 						'U_EDIT'				=> $u_edit . '&amp;filename=' . $filename,
-						'SIZE'					=> $themecolordev_directory->get_filesize($filename),
-						'COMMENT'				=> $themecolordev_directory->get_comment($filename),
+						'SIZE'					=> $scssthemedev_directory->get_filesize($filename),
+						'COMMENT'				=> $scssthemedev_directory->get_comment($filename),
 					]);
 				}
 
 				$u_show = append_sid($phpbb_root_path . 'index.' . $php_ext, [
-						'themecolordev_show_events' => 1,
+						'scssthemedev_show_events' => 1,
 					]);
 
 				$template->assign_vars([
 					'U_ACTION'					=> $this->u_action,
 					'NEW_FILE'					=> $new_file,
-					'U_MARTTIPHPBB_THEMECOLORDEV_SHOW_EVENTS'	=> $u_show,
+					'U_MARTTIPHPBB_SCSSTHEMEDEV_SHOW_EVENTS'	=> $u_show,
 				]);
 		
 				break;

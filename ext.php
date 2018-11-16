@@ -1,14 +1,14 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb themecolordev
+* phpBB Extension - marttiphpbb scssthemedev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\themecolordev;
+namespace marttiphpbb\scssthemedev;
 
 use phpbb\extension\base;
-use marttiphpbb\themecolordev\model\themecolordev_directory;
+use marttiphpbb\scssthemedev\model\scssthemedev_directory;
 
 class ext extends base
 {
@@ -29,8 +29,8 @@ class ext extends base
 				// create directory
 				$phpbb_root_path = $this->container->getParameter('core.root_path');
 				$language = $this->container->get('language');
-				$themecolordev_directory = new themecolordev_directory($language, $phpbb_root_path);
-				$themecolordev_directory->create();
+				$scssthemedev_directory = new scssthemedev_directory($language, $phpbb_root_path);
+				$scssthemedev_directory->create();
 				return '1';
 				break;
 			default:
@@ -46,8 +46,8 @@ class ext extends base
 			case '':
 				$phpbb_root_path = $this->container->getParameter('core.root_path');
 				$language = $this->container->get('language');
-				$themecolordev_directory = new themecolordev_directory($language, $phpbb_root_path);
-				$themecolordev_directory->remove();
+				$scssthemedev_directory = new scssthemedev_directory($language, $phpbb_root_path);
+				$scssthemedev_directory->remove();
 				return '1';
 				break;
 			default:

@@ -1,8 +1,8 @@
 {
-	"name": "marttiphpbb/themecolordev",
+	"name": "marttiphpbb/scssthemedev",
 	"type": "phpbb-extension",
-	"description": "Theme Color Dev Extension for phpBB 3.2",
-	"homepage": "https://github.com/marttiphpbb/phpbb-ext-themecolordev",
+	"description": "Scss Theme Dev Extension for phpBB 3.2",
+	"homepage": "https://github.com/marttiphpbb/phpbb-ext-scssthemedev",
 	"version": "0.1.0",
 	"time": "2018-11-16",
 	"keywords": ["phpbb", "extension", "template", "custom"],
@@ -21,14 +21,14 @@
 		"phpbb/epv": "dev-master"
 	},
 	"extra": {
-		"display-name": "Theme Color Dev",
+		"display-name": "Scss Theme Dev",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.2.3"
 		},
 		"version-check": {
 			"host": "marttiphpbb.github.io",
 			"directory": "/version",
-			"filename": "themecolordev.json"
+			"filename": "scssthemedev.json"
 		}
 	}
 }

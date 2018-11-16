@@ -1,4 +1,4 @@
-a.themecolordev-event, a.themecolordev-event-head, a.themecolordev-event-hide
+a.scssthemedev-event, a.scssthemedev-event-head, a.scssthemedev-event-hide
 {
     background-color: rgb(28, 46, 46);
     color: white;
@@ -8,12 +8,12 @@ a.themecolordev-event, a.themecolordev-event-head, a.themecolordev-event-hide
     margin-right: 2px;
 }
 
-a.themecolordev-event-head
+a.scssthemedev-event-head
 {
 	background-color: rgb(61, 102, 102);
 }
 
-a.themecolordev-event-hide
+a.scssthemedev-event-hide
 {
 	background-color: rgb(199, 0, 0);
 }

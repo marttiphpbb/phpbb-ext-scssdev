@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb themecolordev
+* phpBB Extension - marttiphpbb scssthemedev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\themecolordev\event;
+namespace marttiphpbb\scssthemedev\event;
 
 use phpbb\event\data as event;
 use phpbb\auth\auth;
@@ -16,8 +16,8 @@ use phpbb\user;
 use phpbb\language\language;
 use phpbb\template\twig\loader;
 use phpbb\extension\manager as ext_manager;
-use marttiphpbb\themecolordev\model\themecolordev_directory;
-use marttiphpbb\themecolordev\util\cnst;
+use marttiphpbb\scssthemedev\model\scssthemedev_directory;
+use marttiphpbb\scssthemedev\util\cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -66,7 +66,7 @@ class listener implements EventSubscriberInterface
 	public function core_page_header(event $event)
 	{
 		$this->loader->addSafeDirectory($this->phpbb_root_path . cnst::DIR);
-//		$this->template->assign_var('MARTTIPHPBB_THEMECOLORDEV_PATH', cnst::PATH . '/');
+//		$this->template->assign_var('MARTTIPHPBB_SCSSTHEMEDEV_PATH', cnst::PATH . '/');
 		if ($this->ext_manager->is_enabled('marttiphpbb/codemirror'))
 		{
 			$load = $this->container->get('marttiphpbb.codemirror.load');
@@ -82,7 +82,7 @@ class listener implements EventSubscriberInterface
 		}
 
 		$context = $event['context'];
-		$context['marttiphpbb_themecolordev'] = [
+		$context['marttiphpbb_scssthemedev'] = [
 			'enable'	=> true,
 		];
 

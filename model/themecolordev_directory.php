@@ -1,16 +1,16 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb themecolordev
+* phpBB Extension - marttiphpbb scssthemedev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\themecolordev\model;
+namespace marttiphpbb\scssthemedev\model;
 
 use phpbb\language\language;
-use marttiphpbb\themecolordev\util\cnst;
+use marttiphpbb\scssthemedev\util\cnst;
 
-class themecolordev_directory
+class scssthemedev_directory
 {
 	protected $phpbb_root_path;
 	protected $language;
@@ -21,7 +21,7 @@ class themecolordev_directory
 		'forumlist_body_category_header_before'	=> '',
 		'overall_footer_after'					=> '',
 		'overall_footer_body_after'				=> '',
-		'overall_footer_copyright_append'		=> 'MARTTIPHPBB_THEMECOLORDEV_GITHUB_LINK',
+		'overall_footer_copyright_append'		=> 'MARTTIPHPBB_SCSSTHEMEDEV_GITHUB_LINK',
 		'overall_footer_page_body_after'		=> '',
 		'overall_header_body_before'			=> '',
 		'overall_header_content_before'			=> '',
@@ -89,7 +89,7 @@ class themecolordev_directory
 
 		if (!$f)
 		{
-			trigger_error(sprintf($this->language->lang('ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_OPENED'), $filename), E_USER_WARNING);
+			trigger_error(sprintf($this->language->lang('ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_OPENED'), $filename), E_USER_WARNING);
 		}
 
 		if ($first_line = @fgets($f))
@@ -110,7 +110,7 @@ class themecolordev_directory
 		if ($size === false)
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_SIZE_FAIL'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_SIZE_FAIL'),
 				$filename), E_USER_WARNING);
 		}
 
@@ -133,7 +133,7 @@ class themecolordev_directory
 	{
 		if (!@unlink($this->phpbb_root_path . cnst::DIR . '/' . $filename))
 		{
-			trigger_error(sprintf($this->language->lang('ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_DELETED'), $filename), E_USER_WARNING);
+			trigger_error(sprintf($this->language->lang('ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_DELETED'), $filename), E_USER_WARNING);
 		}
 	}
 
@@ -144,14 +144,14 @@ class themecolordev_directory
 		if (in_array(strtolower($file_extension), self::DISALLOWED['file_extensions']))
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_EXTENSION_NOT_ALLOWED'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_EXTENSION_NOT_ALLOWED'),
 				$file_extension), E_USER_WARNING);
 		}
 
 		if (!@touch($this->phpbb_root_path . cnst::DIR . '/' . $filename))
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_CREATED'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_CREATED'),
 				$filename), E_USER_WARNING);
 		}
 
@@ -165,7 +165,7 @@ class themecolordev_directory
 			if (stripos($data, $disallowed_tag) !== false)
 			{
 				trigger_error(sprintf($this->language->lang(
-					'ACP_MARTTIPHPBB_THEMECOLORDEV_PHP_NOT_ALLOWED')),
+					'ACP_MARTTIPHPBB_SCSSTHEMEDEV_PHP_NOT_ALLOWED')),
 						E_USER_WARNING);
 			}
 		}
@@ -173,14 +173,14 @@ class themecolordev_directory
 		if (!($f = @fopen($this->phpbb_root_path . cnst::DIR . '/' . $filename, 'wb')))
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_OPENED'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_OPENED'),
 				$filename), E_USER_WARNING);
 		}
 
 		if (@fwrite($f, $data) === false)
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_WRITE_FAIL'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_WRITE_FAIL'),
 				$filename), E_USER_WARNING);
 		}
 
@@ -195,7 +195,7 @@ class themecolordev_directory
 
 		if ($content === false)
 		{
-			trigger_error(sprintf($this->language->lang('ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_READ_FAIL'), cnst::DIR), E_USER_WARNING);
+			trigger_error(sprintf($this->language->lang('ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_READ_FAIL'), cnst::DIR), E_USER_WARNING);
 		}
 
 		return $content;
@@ -208,7 +208,7 @@ class themecolordev_directory
 		if ($list === false)
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_DIRECTORY_LIST_FAIL'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DIRECTORY_LIST_FAIL'),
 				cnst::DIR), E_USER_WARNING);
 		}
 
@@ -229,7 +229,7 @@ class themecolordev_directory
 			if (!is_dir($dir))
 			{
 				trigger_error(sprintf($this->language->lang(
-					'ACP_MARTTIPHPBB_THEMECOLORDEV_DIRECTORY_NOT_CREATED'),
+					'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DIRECTORY_NOT_CREATED'),
 					cnst::DIR), E_USER_WARNING);
 			}
 		}
@@ -239,7 +239,7 @@ class themecolordev_directory
 		if (@file_put_contents($filename, self::HTACCESS) === false)
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_WRITE_FAIL'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_WRITE_FAIL'),
 				$filename), E_USER_WARNING);
 		}
 	}
@@ -261,7 +261,7 @@ class themecolordev_directory
 		if ($objects === false)
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_DIRECTORY_LIST_FAIL'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DIRECTORY_LIST_FAIL'),
 				$dir), E_USER_WARNING);
 		}
 
@@ -279,7 +279,7 @@ class themecolordev_directory
 			if ($filetype === false)
 			{
 				trigger_error(sprintf($this->language->lang(
-					'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_TYPE_FAIL'),
+					'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_TYPE_FAIL'),
 					$object), E_USER_WARNING);
 			}
 
@@ -292,7 +292,7 @@ class themecolordev_directory
 				if (!@unlink($object))
 				{
 					trigger_error(sprintf($this->language->lang(
-						'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_DELETED'),
+						'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_DELETED'),
 						$object), E_USER_WARNING);
 				}
 			}
@@ -301,7 +301,7 @@ class themecolordev_directory
 		if (!@rmdir($dir))
 		{
 			trigger_error(sprintf($this->language->lang(
-				'ACP_MARTTIPHPBB_THEMECOLORDEV_DIRECTORY_NOT_DELETED'),
+				'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DIRECTORY_NOT_DELETED'),
 				$dir), E_USER_WARNING);
 		}
 	}

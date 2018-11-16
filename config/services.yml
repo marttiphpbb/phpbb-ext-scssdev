@@ -1,6 +1,6 @@
 services:
-    marttiphpbb.themecolordev.listener:
-        class: marttiphpbb\themecolordev\event\listener
+    marttiphpbb.scssthemedev.listener:
+        class: marttiphpbb\scssthemedev\event\listener
         arguments:
             - '@auth'
             - '@request'

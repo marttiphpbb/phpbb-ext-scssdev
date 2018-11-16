@@ -1,9 +1,9 @@
-{%- if marttiphpbb_themecolordev.show_events -%}
-    <a class="themecolordev-event" href="{{- marttiphpbb_themecolordev.u_edit_events[block('event_name')] -}}" title="{{- lang('MARTTIPHPBB_THEMECOLORDEV_LINK_EDIT_TITLE') -}}">
+{%- if marttiphpbb_scssthemedev.show_events -%}
+    <a class="scssthemedev-event" href="{{- marttiphpbb_scssthemedev.u_edit_events[block('event_name')] -}}" title="{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_LINK_EDIT_TITLE') -}}">
         {%- block event_name -%}{%- endblock -%}
     </a>
 {%- endif -%}
 
-{%- if MARTTIPHPBB_THEMECOLORDEV_PATH -%}
-    {%- include MARTTIPHPBB_THEMECOLORDEV_PATH ~ block('event_name') ~ '.html' -%} 
+{%- if MARTTIPHPBB_SCSSTHEMEDEV_PATH -%}
+    {%- include MARTTIPHPBB_SCSSTHEMEDEV_PATH ~ block('event_name') ~ '.html' -%} 
 {%- endif -%}

@@ -1,7 +1,7 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb themecolordev
+* phpBB Extension - marttiphpbb scssthemedev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
@@ -18,49 +18,49 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_INCLUDE_EXAMPLE'			=> 
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_INCLUDE_EXAMPLE'			=> 
 		'To include your own created files, 
 		prefix the filename with the variable <code>%1$s</code> like this:',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_EXAMPLE_FILE'				=> 'my_file.html',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_CREATE_FILE'				=> 'Create file',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_DELETE'						=> 'Delete',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_DELETE_FILE_NAME'			=> 'Delete %s',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILES_EXPLAIN'				
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_EXAMPLE_FILE'				=> 'my_file.html',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_CREATE_FILE'				=> 'Create file',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DELETE'						=> 'Delete',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DELETE_FILE_NAME'			=> 'Delete %s',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILES_EXPLAIN'				
 		=> 'Files directly included with template events <code>%1$s</code> cannot be deleted. 
 		All files reside in the directory <code>%2$s</code>.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_SIZE'					=> 'Size',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NAME'					=> 'Name',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_COMMENT'				=> 'Comment',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE'						=> 'File',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_EDITOR_ROWS'				=> 'Editor rows',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_SAVE_CONFIRM'				=> 'Do you want to save the file %s?',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_SAVE'						=> 'Save',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_SAVE_PURGE_CACHE'			=> 'Save and purge the cache',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_SAVE_PURGE_CACHE_CONFIRM'	=> 'Do you want to save the file %s and purge the cache?',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_SAVED'					=> 'The file %s has been saved successfully!',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_SAVED_CACHE_PURGED'	=> 'The file %s has been saved and the cache has been purged successfully!',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_CREATED'				=> 'The file %s has been created.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILENAME_EMPTY'				=> 'The filename was empty.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_CREATED'			=> 'The file %s could not be created.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_ALREADY_EXISTS'		=> 'The file %s already exists.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_DELETE_FILE_CONFIRM'		=> 'Delete file %s ?',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_DELETED'				=> 'The file %s has been deleted.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_DOES_NOT_EXIST'		=> 'The file %s does not exist.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_DELETED'			=> 'Failed to delete file %s.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_OPENED'			=> 'Failed to open file %s.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_NOT_CLOSED'			=> 'Failed to close file %s.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_WRITE_FAIL'			=> 'Failed to write to file %s.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_READ_FAIL'				=> 'Failed to read from file %s.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_TYPE_FAIL'				=> 'Failed to get the file type of %s.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_SIZE_FAIL'				=> 'Failed to get the file size of %s.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_EVENT_FILE_INDICATOR'		=> '(E)',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_SHOW_TEMPLATE_EVENTS_LOCATIONS'	=> 'Show Theme Color Dev template events locations',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_DIRECTORY_NOT_CREATED'		=> 'Failed to create the directory %s',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_DIRECTORY_NOT_DELETED'		=> 'Failed to delete the directory %s',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_DIRECTORY_LIST_FAIL'		=> 'Failed to list content of directory %s',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILE_EXTENSION_NOT_ALLOWED'	=> 'File extension %s is not allowed for security.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_PHP_NOT_ALLOWED'			=> 'Inclusion of php is not allowed for security.',
-	'ACP_MARTTIPHPBB_THEMECOLORDEV_INCLUDEPHP_WARNING'			
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_SIZE'					=> 'Size',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NAME'					=> 'Name',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_COMMENT'				=> 'Comment',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE'						=> 'File',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_EDITOR_ROWS'				=> 'Editor rows',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_SAVE_CONFIRM'				=> 'Do you want to save the file %s?',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_SAVE'						=> 'Save',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_SAVE_PURGE_CACHE'			=> 'Save and purge the cache',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_SAVE_PURGE_CACHE_CONFIRM'	=> 'Do you want to save the file %s and purge the cache?',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_SAVED'					=> 'The file %s has been saved successfully!',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_SAVED_CACHE_PURGED'	=> 'The file %s has been saved and the cache has been purged successfully!',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_CREATED'				=> 'The file %s has been created.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILENAME_EMPTY'				=> 'The filename was empty.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_CREATED'			=> 'The file %s could not be created.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_ALREADY_EXISTS'		=> 'The file %s already exists.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DELETE_FILE_CONFIRM'		=> 'Delete file %s ?',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_DELETED'				=> 'The file %s has been deleted.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_DOES_NOT_EXIST'		=> 'The file %s does not exist.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_DELETED'			=> 'Failed to delete file %s.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_OPENED'			=> 'Failed to open file %s.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_CLOSED'			=> 'Failed to close file %s.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_WRITE_FAIL'			=> 'Failed to write to file %s.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_READ_FAIL'				=> 'Failed to read from file %s.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_TYPE_FAIL'				=> 'Failed to get the file type of %s.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_SIZE_FAIL'				=> 'Failed to get the file size of %s.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_EVENT_FILE_INDICATOR'		=> '(E)',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_SHOW_TEMPLATE_EVENTS_LOCATIONS'	=> 'Show Scss Theme Dev template events locations',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DIRECTORY_NOT_CREATED'		=> 'Failed to create the directory %s',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DIRECTORY_NOT_DELETED'		=> 'Failed to delete the directory %s',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_DIRECTORY_LIST_FAIL'		=> 'Failed to list content of directory %s',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_FILE_EXTENSION_NOT_ALLOWED'	=> 'File extension %s is not allowed for security.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_PHP_NOT_ALLOWED'			=> 'Inclusion of php is not allowed for security.',
+	'ACP_MARTTIPHPBB_SCSSTHEMEDEV_INCLUDEPHP_WARNING'			
 		=> 'Warning! For security, your custom code will not be included 
 		in templates when PHP code inclusion with PHP and INCLUDEPHP 
 		statements is enabled on your board. See %ssecurity settings%s 
