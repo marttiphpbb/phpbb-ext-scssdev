@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb customcode
+* phpBB Extension - marttiphpbb themecolordev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\customcode\event;
+namespace marttiphpbb\themecolordev\event;
 
 use phpbb\event\data as event;
 use phpbb\auth\auth;
@@ -15,8 +15,8 @@ use phpbb\template\twig\twig as template;
 use phpbb\user;
 use phpbb\language\language;
 use phpbb\template\twig\loader;
-use marttiphpbb\customcode\model\customcode_directory;
-use marttiphpbb\customcode\util\cnst;
+use marttiphpbb\themecolordev\model\themecolordev_directory;
+use marttiphpbb\themecolordev\util\cnst;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
@@ -72,7 +72,7 @@ class listener implements EventSubscriberInterface
 		}
 
 		$this->loader->addSafeDirectory($this->phpbb_root_path . cnst::DIR);
-		$this->template->assign_var('CUSTOMCODE_PATH', cnst::PATH . '/');
+		$this->template->assign_var('MARTTIPHPBB_THEMECOLORDEV_PATH', cnst::PATH . '/');
 	}
 
 	public function core_append_sid(event $event)
@@ -92,13 +92,13 @@ class listener implements EventSubscriberInterface
 
 		if (is_string($params))
 		{
-			if (strpos($params, 'customcode_show_events=0') !== false)
+			if (strpos($params, 'themecolordev_show_events=0') !== false)
 			{
 				return;
 			}
 		}
 
-		if ($this->request->variable('customcode_show_events', 0))
+		if ($this->request->variable('themecolordev_show_events', 0))
 		{
 			if (is_string($params))
 			{
@@ -107,7 +107,7 @@ class listener implements EventSubscriberInterface
 					$params .= '&';
 				}
 
-				$params .= 'customcode_show_events=1';
+				$params .= 'themecolordev_show_events=1';
 			}
 			else
 			{
@@ -116,7 +116,7 @@ class listener implements EventSubscriberInterface
 					$params = [];
 				}
 
-				$params['customcode_show_events'] = 1;
+				$params['themecolordev_show_events'] = 1;
 			}
 
 			$event['params'] = $params;
@@ -130,7 +130,7 @@ class listener implements EventSubscriberInterface
 		$context = $event['context'];
 		$tpl = [];
 
-		$show_events = $this->request->variable('customcode_show_events', 0) ? true : false;
+		$show_events = $this->request->variable('themecolordev_show_events', 0) ? true : false;
 		$show_events = $show_events && $this->auth->acl_get('a_');
 		$show_events = $show_events && !$this->config['tpl_allow_php'];
 		$tpl['show_events'] = $show_events;
@@ -142,32 +142,32 @@ class listener implements EventSubscriberInterface
 
 		if (!$show_events)
 		{
-			$context['marttiphpbb_customcode'] = $tpl;
+			$context['marttiphpbb_themecolordev'] = $tpl;
 			$event['context'] = $context;
 			return;
 		}
 
-		$this->language->add_lang('common', 'marttiphpbb/customcode');
+		$this->language->add_lang('common', 'marttiphpbb/themecolordev');
 
 		$page = $this->user->page['script_path'] . $this->user->page['page_name'];
 		$query_string = str_replace([
-			'&customcode_show_events=1',
-			'&customcode_show_events=0',
+			'&themecolordev_show_events=1',
+			'&themecolordev_show_events=0',
 		], '', $query_string);
 		$query_string = str_replace([
-			'customcode_show_events=1',
-			'customcode_show_events=0',
+			'themecolordev_show_events=1',
+			'themecolordev_show_events=0',
 		], '', $query_string);
 		$query_string = trim($query_string, '&');
 		$query_string .= $query_string ? '&' : '';
 
 		$u_edit_events = [];
 		$params = [
-			'i'			=> '-marttiphpbb-customcode-acp-main_module',
+			'i'			=> '-marttiphpbb-themecolordev-acp-main_module',
 			'mode'		=> 'edit',
 		];
 
-		foreach (customcode_directory::TEMPLATE_EVENTS as $event_name => $str)
+		foreach (themecolordev_directory::TEMPLATE_EVENTS as $event_name => $str)
 		{
 			$params['filename'] = $event_name . '.html';
 
@@ -176,10 +176,10 @@ class listener implements EventSubscriberInterface
 				$params, true, $this->user->session_id);
 		}
 
-		$tpl['u_hide'] = append_sid($page, $query_string . 'customcode_show_events=0');
+		$tpl['u_hide'] = append_sid($page, $query_string . 'themecolordev_show_events=0');
 		$tpl['u_edit_events'] = $u_edit_events;
 
-		$context['marttiphpbb_customcode'] = $tpl;
+		$context['marttiphpbb_themecolordev'] = $tpl;
 		$event['context'] = $context;
 	}
 }

@@ -3,10 +3,10 @@
 <h1>{%- block heading -%}{%- endblock -%}</h1>
 {%- block explain -%}{%- endblock -%}
 
-{%- if ACP_CUSTOMCODE_INCLUDEPHP_WARNING -%}
+{%- if ACP_MARTTIPHPBB_THEMECOLORDEV_INCLUDEPHP_WARNING -%}
     <div class="errorbox">
         <p>
-            {{- ACP_CUSTOMCODE_INCLUDEPHP_WARNING -}}
+            {{- ACP_MARTTIPHPBB_THEMECOLORDEV_INCLUDEPHP_WARNING -}}
         </p>
     </div>
 {%- endif -%}
@@ -18,5 +18,5 @@
 
 {%- block footnote -%}{%- endblock -%}
 
-{%- INCLUDEJS '@marttiphpbb_customcode/customcode.js' -%}
+{%- INCLUDEJS '@marttiphpbb_themecolordev/themecolordev.js' -%}
 {%- include 'overall_footer.html' -%}

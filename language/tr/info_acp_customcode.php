@@ -1,7 +1,7 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb customcode
+* phpBB Extension - marttiphpbb themecolordev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
@@ -18,7 +18,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'ACP_CUSTOMCODE'				=> 'Özel Kod',
-	'ACP_CUSTOMCODE_EDIT'		=> 'Düzenle',
-	'ACP_CUSTOMCODE_FILES'	=> 'Dosyalar',
+	'ACP_MARTTIPHPBB_THEMECOLORDEV'				=> 'Özel Kod',
+	'ACP_MARTTIPHPBB_THEMECOLORDEV_EDIT'		=> 'Düzenle',
+	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILES'	=> 'Dosyalar',
 ]);

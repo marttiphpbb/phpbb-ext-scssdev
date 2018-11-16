@@ -2,7 +2,7 @@
 
 /**
 *
-* Custom Code extension for the phpBB Forum Software package.
+* Theme Color Dev extension for the phpBB Forum Software package.
 * French translation by Galixte (http://www.galixte.com)
 *
 * @copyright (c) 2015 marttiphpbb <info@martti.be>
@@ -21,7 +21,7 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-	'ACP_CUSTOMCODE'							=> 'Code personnalisé',
-	'ACP_CUSTOMCODE_EDIT'						=> 'Modifier',
-	'ACP_CUSTOMCODE_FILES'						=> 'Fichiers',
+	'ACP_MARTTIPHPBB_THEMECOLORDEV'							=> 'Code personnalisé',
+	'ACP_MARTTIPHPBB_THEMECOLORDEV_EDIT'						=> 'Modifier',
+	'ACP_MARTTIPHPBB_THEMECOLORDEV_FILES'						=> 'Fichiers',
 ]);

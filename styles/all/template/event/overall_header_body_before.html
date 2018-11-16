@@ -1,22 +1,22 @@
-{%- if marttiphpbb_customcode.u_hide -%}
-    <a class="customcode-event-hide" href="{{- marttiphpbb_customcode.u_hide -}}" title="{{- lang('CUSTOMCODE_HIDE_TEMPLATE_EVENTS_LOCATIONS') -}}">
-        {{- lang('CUSTOMCODE_HIDE') -}}
+{%- if marttiphpbb_themecolordev.u_hide -%}
+    <a class="themecolordev-event-hide" href="{{- marttiphpbb_themecolordev.u_hide -}}" title="{{- lang('MARTTIPHPBB_THEMECOLORDEV_HIDE_TEMPLATE_EVENTS_LOCATIONS') -}}">
+        {{- lang('MARTTIPHPBB_THEMECOLORDEV_HIDE') -}}
     </a>
 {%- endif -%}
 
-{%- embed '@marttiphpbb_customcode/edit_link_head.html' -%}
+{%- embed '@marttiphpbb_themecolordev/edit_link_head.html' -%}
     {%- block event_name -%}
         overall_header_head_append
     {%- endblock event_name -%}
 {%- endembed -%}
 
-{%- embed '@marttiphpbb_customcode/edit_link_head.html' -%}
+{%- embed '@marttiphpbb_themecolordev/edit_link_head.html' -%}
     {%- block event_name -%}
         overall_header_stylesheets_after
     {%- endblock event_name -%}
 {%- endembed -%}
 
-{%- embed '@marttiphpbb_customcode/event.html' -%}
+{%- embed '@marttiphpbb_themecolordev/event.html' -%}
     {%- block event_name -%}
         overall_header_body_before
     {%- endblock event_name -%}

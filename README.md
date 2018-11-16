@@ -1,4 +1,4 @@
-# phpBB 3.2 PhpBB Extension - marttiphpbb Custom Code
+# phpBB 3.2 PhpBB Extension - marttiphpbb Theme Color Dev
 
 [Topic on phpBB.com](https://www.phpbb.com/community/viewtopic.php?f=456&t=2275361)
 
@@ -13,19 +13,19 @@
 
 You can install this on the latest release of phpBB 3.2 by following the steps below:
 
-* Create `marttiphpbb/customcode` in the `ext` directory.
-* Download and unpack the repository into `ext/marttiphpbb/customcode`
-* Enable `Custom Code` in the ACP at `Customise -> Manage extensions`.
-* You can start editing in the ACP at `Extensions` -> `Custom Code`.
+* Create `marttiphpbb/themecolordev` in the `ext` directory.
+* Download and unpack the repository into `ext/marttiphpbb/themecolordev`
+* Enable `Theme Color Dev` in the ACP at `Customise -> Manage extensions`.
+* You can start editing in the ACP at `Extensions` -> `Theme Color Dev`.
 
 ## Uninstall
 
-* Disable `Custom Code` in the ACP at `Customise -> Extension Management -> Extensions`.
-* To permanently uninstall, click `Delete Data` (the `store/customcode` directory will be removed automatically). Optionally delete the `/ext/marttiphpbb/customcode` directory.
+* Disable `Theme Color Dev` in the ACP at `Customise -> Extension Management -> Extensions`.
+* To permanently uninstall, click `Delete Data` (the `store/themecolordev` directory will be removed automatically). Optionally delete the `/ext/marttiphpbb/themecolordev` directory.
 
 ## Support
 
-* Report bugs and other issues to the [Issue Tracker](https://github.com/marttiphpbb/phpbb-ext-customcode/issues).
+* Report bugs and other issues to the [Issue Tracker](https://github.com/marttiphpbb/phpbb-ext-themecolordev/issues).
 
 ## License
 

@@ -1,15 +1,15 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb customcode
+* phpBB Extension - marttiphpbb themecolordev
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\customcode\migrations;
+namespace marttiphpbb\themecolordev\migrations;
 
-use marttiphpbb\customcode\util\cnst;
+use marttiphpbb\themecolordev\util\cnst;
 
-class v_0_1_0 extends \phpbb\db\migration\migration
+class mgr_1 extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
@@ -30,7 +30,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				'acp',
 				cnst::L_ACP,
 				[
-					'module_basename'	=> '\marttiphpbb\customcode\acp\main_module',
+					'module_basename'	=> '\marttiphpbb\themecolordev\acp\main_module',
 					'modes'				=> [
 						'files',
 						'edit',
