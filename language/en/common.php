@@ -42,4 +42,10 @@ $lang = array_merge($lang, [
 		=> 'Failed to list content of directory %s',
 	'MARTTIPHPBB_SCSSTHEMEDEV_PROCESS_AND_SAVE'
 		=> 'Process and Save',
+	'MARTTIPHPBB_SCSSTHEMEDEV_NONE'
+		=> 'None',
+	'MARTTIPHPBB_SCSSTHEMEDEV_FILE'
+		=> 'File',
+	'MARTTIPHPBB_SCSSTHEMEDEV_NEW_FILE'
+		=> 'New File (leave out .scss extension)',
 ]);

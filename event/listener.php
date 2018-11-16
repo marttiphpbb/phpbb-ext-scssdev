@@ -25,10 +25,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener implements EventSubscriberInterface
 {
 	protected $auth;
-	protected $config;
-	protected $request;
-	protected $template;
 	protected $user;
+	protected $request;
 	protected $language;
 	protected $loader;
 	protected $ext_manager;
@@ -37,9 +35,14 @@ class listener implements EventSubscriberInterface
 	protected $php_ext;
 
 	protected $scssthemedev_directory;
+	protected $content;
+	protected $filename;
+	protected $filename_compiled;
+	protected $crc;
 
 	public function __construct(
 		language $language,
+		user $user,
 		auth $auth,
 		request $request,
 		loader $loader,
@@ -50,6 +53,7 @@ class listener implements EventSubscriberInterface
 	)
 	{
 		$this->language = $language;
+		$this->user = $user;
 		$this->auth = $auth;
 		$this->request = $request;
 		$this->loader = $loader;
@@ -62,7 +66,8 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return [
-			'core.page_header'		=> 'core_page_header',
+			'core.page_header'
+				=> 'core_page_header',
 			'core.twig_environment_render_template_before'
 				=> 'core_twig_environment_render_template_before',
 		];
@@ -78,20 +83,58 @@ class listener implements EventSubscriberInterface
 		$this->language->add_lang('common', cnst::FOLDER);
 		$this->scssthemedev_directory = new scssthemedev_directory($this->language, $this->phpbb_root_path);
 
-		if ($this->request->is_set_post('marttiphpbb-scssthemedev-submit'))
+		$file = $this->request->variable('marttiphpbb_scssthemedev', '', false, \phpbb\request\request_interface::COOKIE);
+
+		if ($file === '')
 		{
-			$filename = $this->request->variable('marttiphpbb-scssthemedev-filename', 'zzz.scss');
-			$content = $this->request->variable('marttiphpbb-scssthemedev-content', '', true);
+			$crc = '';
+		}
+		else
+		{
+			list($file, $crc) = explode('?', $file);
+		}
+
+		$submit = $this->request->is_set_post('marttiphpbb_scssthemedev_submit');
+		$filename = $this->request->variable('marttiphpbb_scssthemedev_filename', '');
+
+		if ($submit && $filename !== $file)
+		{
+			$file = $filename;
+			$content = $this->scssthemedev_directory->file_get_contents($file . '.css');
+			$crc = crc32($content);
+		}
+		else if ($submit)
+		{
+			$new_file = $this->request->variable('marttiphpbb_scssthemedev_new', '');
+			$filename = $new_file ? $new_file : $filename;
+
+			$content = $this->request->variable('marttiphpbb_scssthemedev_content', '', true);
 			$content = utf8_normalize_nfc($content);
 			$content = htmlspecialchars_decode($content);
-			$this->scssthemedev_directory->save_to_file($filename, $content);
-
-			$filename_compiled = pathinfo($filename, PATHINFO_FILENAME);
-			$filename_compiled .= '.css';
+			$this->scssthemedev_directory->save_to_file($filename . '.scss', $content);
 			$scss = new Compiler();
-			$compiled = $scss->compile($content);
-			$this->scssthemedev_directory->save_to_file($filename_compiled, $compiled);
+			$content_compiled = $scss->compile($content);
+			$this->scssthemedev_directory->save_to_file($filename . '.css', $content_compiled);
+			$crc = crc32($content_compiled);
+			$this->user->set_cookie('marttiphpbb_scssthemedev', $filename . '?' . $crc);
 		}
+		else
+		{
+			$filename = $this->request->variable('marttiphpbb_scssthemedev_file', '');
+			if ($file)
+			{
+				$content = $filename ? $this->scssthemedev_directory->file_get_contents($filename) : '';
+				$filename_compiled = pathinfo($filename, PATHINFO_FILENAME);
+				$filename_compiled .= '.css';
+				$filename_compiled = $this->scssthemedev_directory->file_exists($filename_compiled) ? $filename_compiled : '';
+				$crc = $filename_compiled ? crc32($this->scssthemedev_directory->file_get_contents($filename_compiled)) : '';
+			}
+		}
+
+		$this->filename = $filename;
+		$this->filename_compiled = $filename_compiled;
+		$this->content = $content;
+		$this->crc = $crc;
 
 		$this->loader->addSafeDirectory($this->phpbb_root_path . cnst::DIR);
 
@@ -111,11 +154,12 @@ class listener implements EventSubscriberInterface
 
 		$context = $event['context'];
 		$context['marttiphpbb_scssthemedev'] = [
-			'enable'		=> true,
-			'path'			=> cnst::PATH,
-			'filename'		=> $this->filename ?? 'zzz.scss',
-			'content'		=> $this->content ?? '',
-			'filename_compiled'	=> '',
+			'enable'				=> true,
+			'path'					=> cnst::PATH,
+			'filenames'				=> $this->scssthemedev_directory->get_scss_filenames(),
+			'filename'				=> $this->request->variable('marttiphpbb_scssthemedev_file', ''),
+			'content'				=> $this->content,
+			'version'				=> $this->crc,
 		];
 
 		$event['context'] = $context;

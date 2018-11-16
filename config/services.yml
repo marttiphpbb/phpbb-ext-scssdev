@@ -3,6 +3,7 @@ services:
         class: marttiphpbb\scssthemedev\event\listener
         arguments:
             - '@language'
+            - '@user'
             - '@auth'
             - '@request'
             - '@template.twig.loader'

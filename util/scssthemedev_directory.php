@@ -28,20 +28,12 @@ class scssthemedev_directory
 		$this->language->add_lang('common', cnst::FOLDER);
 	}
 
-	public function get_basename(string $filename):string
+	public function file_exists(string $filename):bool
 	{
-		return basename($filename, self::FILE_EXTENSION);
+		return file_exists($this->phpbb_root_path . cnst::DIR . '/' . $filename);
 	}
 
-	public function delete_file(string $filename)
-	{
-		if (!@unlink($this->phpbb_root_path . cnst::DIR . '/' . $filename))
-		{
-			trigger_error(sprintf($this->language->lang(cnst::L . '_FILE_NOT_DELETED'), $filename), E_USER_WARNING);
-		}
-	}
-
-	public function create_file(string $filename)
+	public function create_file(string $filename):void
 	{
 		if (!@touch($this->phpbb_root_path . cnst::DIR . '/' . $filename))
 		{
@@ -49,11 +41,9 @@ class scssthemedev_directory
 				cnst::L . '_FILE_NOT_CREATED'),
 				$filename), E_USER_WARNING);
 		}
-
-		return;
 	}
 
-	public function save_to_file(string $filename, string $data)
+	public function save_to_file(string $filename, string $data):void
 	{
 		if (!($f = @fopen($this->phpbb_root_path . cnst::DIR . '/' . $filename, 'wb')))
 		{
@@ -70,8 +60,6 @@ class scssthemedev_directory
 		}
 
 		fclose($f);
-
-		return;
 	}
 
 	public function file_get_contents(string $filename):string
@@ -84,6 +72,22 @@ class scssthemedev_directory
 		}
 
 		return $content;
+	}
+
+	public function get_scss_filenames():array
+	{
+		$ret = [];
+		$files = $this->get_filenames();
+
+		foreach($files as $f)
+		{
+			if (pathinfo($f, PATHINFO_EXTENSION) === 'scss')
+			{
+				$ret[] = pathinfo($f, PATHINFO_FILENAME);
+			}
+		}
+
+		return $ret;
 	}
 
 	public function get_filenames():array

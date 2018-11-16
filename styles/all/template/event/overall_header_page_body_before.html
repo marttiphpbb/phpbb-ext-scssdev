@@ -1,9 +1,23 @@
 {%- if marttiphpbb_scssthemedev.enable -%}
     <form method="post">
-    <textarea name="marttiphpbb-scssthemedev-content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
+    <label>{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_FILE') -}}{{- lang('COLON') }}
+    <select name="marttiphpbb_scssthemedev_filename" id="marttiphpbb_scssthemedev_filename">
+        <option value=""{%- if not marttiphpbb_scssthemedev.filename %} selected{%- endif -%}>** {{ lang('MARTTIPHPBB_SCSSTHEMEDEV_NONE') }} **</option>
+        {%- for f in marttiphpbb_scssthemedev.filenames -%}
+            <option value="{{- f -}}"{%- if marttiphpbb_scssthemedev.filename == f %} selected{%- endif -%}>{{- f -}}.scss</option>
+        {%- endfor -%}
+    </select>
+    </label>
+    <label>{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_NEW_FILE') -}}{{- lang('COLON') }}
+        <input type="text" name="marttiphpbb_scssthemedev_new" value="">
+    </label>
+    <textarea name="marttiphpbb_scssthemedev_content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
         {{- marttiphpbb_scssthemedev.content -}}
     </textarea>
-    <input type="hidden" name="marttiphpbb-scssthemedev-filename" value="{{- marttiphpbb_scssthemedev.filename -}}">
-    <input type="submit" name="marttiphpbb-scssthemedev-submit" value="{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
+    <input type="submit" name="marttiphpbb_scssthemedev_submit" value="{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
     </form>
+    {%- if marttiphpbb_scssthemedev.filename -%}
+        {%- INCLUDECSS marttiphpbb_scssthemedev.path ~ marttiphpbb_scssthemedev.filename ~ '.css?v=' ~ marttiphpbb_scssthemedev.crc -%}
+    {%- endif -%}
+    {%- INCLUDEJS '@marttiphpbb_scssthemedev/scssthemedev.js' -%}
 {%- endif -%}
