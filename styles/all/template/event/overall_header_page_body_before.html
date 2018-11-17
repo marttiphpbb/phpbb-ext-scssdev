@@ -24,7 +24,7 @@
     <input type="submit" name="marttiphpbb_scssdev_submit" id="marttiphpbb_scssdev_submit" value="{{- lang('MARTTIPHPBB_SCSSDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
     </form>
     {%- if marttiphpbb_scssdev.file -%}
-        {%- INCLUDECSS marttiphpbb_scssdev.path ~ marttiphpbb_scssdev.file ~ '.css?v=' ~ marttiphpbb_scssdev.crc -%}
+        {%- INCLUDECSS marttiphpbb_scssdev.path ~ marttiphpbb_scssdev.file ~ '.css?v=' ~ marttiphpbb_scssdev.version -%}
     {%- endif -%}
     {%- INCLUDEJS '@marttiphpbb_scssdev/scssdev.js' -%}
 {%- endif -%}
