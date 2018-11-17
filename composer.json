@@ -1,8 +1,8 @@
 {
-	"name": "marttiphpbb/scssthemedev",
+	"name": "marttiphpbb/scssdev",
 	"type": "phpbb-extension",
-	"description": "Scss Theme Dev Extension for phpBB 3.2",
-	"homepage": "https://github.com/marttiphpbb/phpbb-ext-scssthemedev",
+	"description": "Scss Dev Extension for phpBB 3.2",
+	"homepage": "https://github.com/marttiphpbb/phpbb-ext-scssdev",
 	"version": "0.1.0",
 	"time": "2018-11-16",
 	"keywords": ["phpbb", "extension", "template", "custom"],
@@ -21,14 +21,14 @@
 		"phpbb/epv": "dev-master"
 	},
 	"extra": {
-		"display-name": "Scss Theme Dev",
+		"display-name": "Scss Dev",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.2.3"
 		},
 		"version-check": {
 			"host": "marttiphpbb.github.io",
 			"directory": "/version",
-			"filename": "scssthemedev.json"
+			"filename": "scssdev.json"
 		}
 	}
 }

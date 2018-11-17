@@ -1,30 +1,30 @@
-{%- if marttiphpbb_scssthemedev.enable -%}
-    {%- if marttiphpbb_scssthemedev.errors -%}
+{%- if marttiphpbb_scssdev.enable -%}
+    {%- if marttiphpbb_scssdev.errors -%}
         <div class="panel" style="background: #faa; color: black;">
-        {%- for e in marttiphpbb_scssthemedev.errors -%}
+        {%- for e in marttiphpbb_scssdev.errors -%}
             <p>{{- e -}}</p>
         {%- endfor -%}
         </div>
     {%- endif -%}
     <form method="post">
-    <label>{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_FILE') -}}{{- lang('COLON') }}
-    <select name="marttiphpbb_scssthemedev_file" id="marttiphpbb_scssthemedev_file">
-        <option value=""{%- if not marttiphpbb_scssthemedev.file %} selected{%- endif -%}>** {{ lang('MARTTIPHPBB_SCSSTHEMEDEV_NONE') }} **</option>
-        {%- for f in marttiphpbb_scssthemedev.files -%}
-            <option value="{{- f -}}"{%- if marttiphpbb_scssthemedev.file == f %} selected{%- endif -%}>{{- f -}}.scss</option>
+    <label>{{- lang('MARTTIPHPBB_SCSSDEV_FILE') -}}{{- lang('COLON') }}
+    <select name="marttiphpbb_scssdev_file" id="marttiphpbb_scssdev_file">
+        <option value=""{%- if not marttiphpbb_scssdev.file %} selected{%- endif -%}>** {{ lang('MARTTIPHPBB_SCSSDEV_NONE') }} **</option>
+        {%- for f in marttiphpbb_scssdev.files -%}
+            <option value="{{- f -}}"{%- if marttiphpbb_scssdev.file == f %} selected{%- endif -%}>{{- f -}}.scss</option>
         {%- endfor -%}
     </select>
     </label>
-    <label>{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_NEW_FILE') -}}{{- lang('COLON') }}
-        <input type="text" name="marttiphpbb_scssthemedev_new" value="">
+    <label>{{- lang('MARTTIPHPBB_SCSSDEV_NEW_FILE') -}}{{- lang('COLON') }}
+        <input type="text" name="marttiphpbb_scssdev_new" value="">
     </label>
-    <textarea name="marttiphpbb_scssthemedev_content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
-        {{- marttiphpbb_scssthemedev.content -}}
+    <textarea name="marttiphpbb_scssdev_content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
+        {{- marttiphpbb_scssdev.content -}}
     </textarea>
-    <input type="submit" name="marttiphpbb_scssthemedev_submit" id="marttiphpbb_scssthemedev_submit" value="{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
+    <input type="submit" name="marttiphpbb_scssdev_submit" id="marttiphpbb_scssdev_submit" value="{{- lang('MARTTIPHPBB_SCSSDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
     </form>
-    {%- if marttiphpbb_scssthemedev.file -%}
-        {%- INCLUDECSS marttiphpbb_scssthemedev.path ~ marttiphpbb_scssthemedev.file ~ '.css?v=' ~ marttiphpbb_scssthemedev.crc -%}
+    {%- if marttiphpbb_scssdev.file -%}
+        {%- INCLUDECSS marttiphpbb_scssdev.path ~ marttiphpbb_scssdev.file ~ '.css?v=' ~ marttiphpbb_scssdev.crc -%}
     {%- endif -%}
-    {%- INCLUDEJS '@marttiphpbb_scssthemedev/scssthemedev.js' -%}
+    {%- INCLUDEJS '@marttiphpbb_scssdev/scssdev.js' -%}
 {%- endif -%}

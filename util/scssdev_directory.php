@@ -1,16 +1,16 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb scssthemedev
+* phpBB Extension - marttiphpbb scssdev
 * @copyright (c) 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\scssthemedev\util;
+namespace marttiphpbb\scssdev\util;
 
 use phpbb\language\language;
-use marttiphpbb\scssthemedev\util\cnst;
+use marttiphpbb\scssdev\util\cnst;
 
-class scssthemedev_directory
+class scssdev_directory
 {
 	protected $phpbb_root_path;
 	protected $language;

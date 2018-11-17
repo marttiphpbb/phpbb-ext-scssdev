@@ -1,4 +1,4 @@
-# phpBB 3.2 PhpBB Extension - marttiphpbb Scss Theme Dev
+# phpBB 3.2 PhpBB Extension - marttiphpbb Scss Dev
 
 [Topic on phpBB.com](https://www.phpbb.com/community/viewtopic.php?f=456)
 
@@ -17,19 +17,19 @@
 
 You can install this on the latest release of phpBB 3.2 by following the steps below:
 
-* Create `marttiphpbb/scssthemedev` in the `ext` directory.
-* Download and unpack the repository into `ext/marttiphpbb/scssthemedev`
-* Enable `Scss Theme Dev` in the ACP at `Customise -> Manage extensions`.
-* You can start editing in the ACP at `Extensions` -> `Scss Theme Dev`.
+* Create `marttiphpbb/scssdev` in the `ext` directory.
+* Download and unpack the repository into `ext/marttiphpbb/scssdev`
+* Enable `Scss Dev` in the ACP at `Customise -> Manage extensions`.
+* You can start editing in the ACP at `Extensions` -> `Scss Dev`.
 
 ## Uninstall
 
-* Disable `Scss Theme Dev` in the ACP at `Customise -> Extension Management -> Extensions`.
-* To permanently uninstall, click `Delete Data` (the `store/marttiphpbb/scssthemedev` directory will be removed automatically). Optionally delete the `/ext/marttiphpbb/scssthemedev` directory.
+* Disable `Scss Dev` in the ACP at `Customise -> Extension Management -> Extensions`.
+* To permanently uninstall, click `Delete Data` (the `store/marttiphpbb/scssdev` directory will be removed automatically). Optionally delete the `/ext/marttiphpbb/scssdev` directory.
 
 ## Support
 
-* Report bugs and other issues to the [Issue Tracker](https://github.com/marttiphpbb/phpbb-ext-scssthemedev/issues).
+* Report bugs and other issues to the [Issue Tracker](https://github.com/marttiphpbb/phpbb-ext-scssdev/issues).
 
 ## License
 

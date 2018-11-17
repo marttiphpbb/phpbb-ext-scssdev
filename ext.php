@@ -1,14 +1,14 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb scssthemedev
+* phpBB Extension - marttiphpbb scssdev
 * @copyright (c) 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\scssthemedev;
+namespace marttiphpbb\scssdev;
 
 use phpbb\extension\base;
-use marttiphpbb\scssthemedev\util\scssthemedev_directory;
+use marttiphpbb\scssdev\util\scssdev_directory;
 
 class ext extends base
 {
@@ -29,8 +29,8 @@ class ext extends base
 				// create directory
 				$phpbb_root_path = $this->container->getParameter('core.root_path');
 				$language = $this->container->get('language');
-				$scssthemedev_directory = new scssthemedev_directory($language, $phpbb_root_path);
-				$scssthemedev_directory->create();
+				$scssdev_directory = new scssdev_directory($language, $phpbb_root_path);
+				$scssdev_directory->create();
 				return '1';
 				break;
 			default:
@@ -46,8 +46,8 @@ class ext extends base
 			case '':
 				$phpbb_root_path = $this->container->getParameter('core.root_path');
 				$language = $this->container->get('language');
-				$scssthemedev_directory = new scssthemedev_directory($language, $phpbb_root_path);
-				$scssthemedev_directory->remove();
+				$scssdev_directory = new scssdev_directory($language, $phpbb_root_path);
+				$scssdev_directory->remove();
 				return '1';
 				break;
 			default:

@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb scssthemedev
+* phpBB Extension - marttiphpbb scssdev
 * @copyright (c) 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\scssthemedev\event;
+namespace marttiphpbb\scssdev\event;
 
 use phpbb\event\data as event;
 use phpbb\auth\auth;
@@ -15,8 +15,8 @@ use phpbb\user;
 use phpbb\language\language;
 use phpbb\template\twig\loader;
 use phpbb\extension\manager as ext_manager;
-use marttiphpbb\scssthemedev\util\scssthemedev_directory;
-use marttiphpbb\scssthemedev\util\cnst;
+use marttiphpbb\scssdev\util\scssdev_directory;
+use marttiphpbb\scssdev\util\cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Leafo\ScssPhp\Compiler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -32,7 +32,7 @@ class listener implements EventSubscriberInterface
 	protected $container;
 	protected $phpbb_root_path;
 
-	protected $scssthemedev_directory;
+	protected $scssdev_directory;
 	protected $content;
 	protected $file;
 	protected $crc;
@@ -80,21 +80,21 @@ class listener implements EventSubscriberInterface
 		}
 
 		$this->language->add_lang('common', cnst::FOLDER);
-		$this->scssthemedev_directory = new scssthemedev_directory($this->language, $this->phpbb_root_path);
+		$this->scssdev_directory = new scssdev_directory($this->language, $this->phpbb_root_path);
 
 		$cookie_name = $this->config['cookie_name'];
-		$file = $this->request->variable($cookie_name . '_marttiphpbb_scssthemedev_file', '', false, \phpbb\request\request_interface::COOKIE);
-		$crc = $this->request->variable($cookie_name . '_marttiphpbb_scssthemedev_crc', '', false, \phpbb\request\request_interface::COOKIE);
+		$file = $this->request->variable($cookie_name . '_marttiphpbb_scssdev_file', '', false, \phpbb\request\request_interface::COOKIE);
+		$crc = $this->request->variable($cookie_name . '_marttiphpbb_scssdev_crc', '', false, \phpbb\request\request_interface::COOKIE);
 
-		$submit = $this->request->is_set_post('marttiphpbb_scssthemedev_submit');
-		$select_file = $this->request->variable('marttiphpbb_scssthemedev_file', '');
-		$new_file = $this->request->variable('marttiphpbb_scssthemedev_new', '');
+		$submit = $this->request->is_set_post('marttiphpbb_scssdev_submit');
+		$select_file = $this->request->variable('marttiphpbb_scssdev_file', '');
+		$new_file = $this->request->variable('marttiphpbb_scssdev_new', '');
 
 		if ($submit)
 		{
 			if ($new_file)
 			{
-				$exists = $this->scssthemedev_directory->file_exists($new_file . '.scss');
+				$exists = $this->scssdev_directory->file_exists($new_file . '.scss');
 
 				if ($exists)
 				{
@@ -117,16 +117,16 @@ class listener implements EventSubscriberInterface
 			else
 			{
 				$file = $select_file;
-				$this->content = $this->scssthemedev_directory->file_get_contents($file . '.scss');
+				$this->content = $this->scssdev_directory->file_get_contents($file . '.scss');
 				$crc = crc32($this->content);
 			}
 
 			if (isset($save) && $save)
 			{
-				$content = $this->request->variable('marttiphpbb_scssthemedev_content', '', true);
+				$content = $this->request->variable('marttiphpbb_scssdev_content', '', true);
 				$content = utf8_normalize_nfc($content);
 				$this->content = htmlspecialchars_decode($content);
-				$this->scssthemedev_directory->save_to_file($file . '.scss', $this->content);
+				$this->scssdev_directory->save_to_file($file . '.scss', $this->content);
 				$scss = new Compiler();
 				try
 				{
@@ -140,18 +140,18 @@ class listener implements EventSubscriberInterface
 					$content_compiled = '';
 				}
 
-				$this->scssthemedev_directory->save_to_file($file . '.css', $content_compiled);
+				$this->scssdev_directory->save_to_file($file . '.css', $content_compiled);
 				$crc = crc32($this->content);
 			}
 
-			$this->user->set_cookie('marttiphpbb_scssthemedev_file', $file, 0);
-			$this->user->set_cookie('marttiphpbb_scssthemedev_crc', $crc, 0);
+			$this->user->set_cookie('marttiphpbb_scssdev_file', $file, 0);
+			$this->user->set_cookie('marttiphpbb_scssdev_crc', $crc, 0);
 		}
 		else if ($file
-			&& $this->scssthemedev_directory->file_exists($file . '.scss')
-			&& $this->scssthemedev_directory->file_exists($file . '.css'))
+			&& $this->scssdev_directory->file_exists($file . '.scss')
+			&& $this->scssdev_directory->file_exists($file . '.css'))
 		{
-			$this->content = $this->scssthemedev_directory->file_get_contents($file . '.scss');
+			$this->content = $this->scssdev_directory->file_get_contents($file . '.scss');
 		}
 		else
 		{
@@ -185,10 +185,10 @@ class listener implements EventSubscriberInterface
 		}
 
 		$context = $event['context'];
-		$context['marttiphpbb_scssthemedev'] = [
+		$context['marttiphpbb_scssdev'] = [
 			'enable'	=> true,
 			'path'		=> cnst::PATH,
-			'files'		=> $this->scssthemedev_directory->get_scss_filenames(),
+			'files'		=> $this->scssdev_directory->get_scss_filenames(),
 			'file'		=> $this->file,
 			'content'	=> $this->content,
 			'version'	=> $this->crc,

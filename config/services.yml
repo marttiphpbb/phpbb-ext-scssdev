@@ -1,6 +1,6 @@
 services:
-    marttiphpbb.scssthemedev.listener:
-        class: marttiphpbb\scssthemedev\event\listener
+    marttiphpbb.scssdev.listener:
+        class: marttiphpbb\scssdev\event\listener
         arguments:
             - '@language'
             - '@user'
