@@ -1,4 +1,11 @@
 {%- if marttiphpbb_scssthemedev.enable -%}
+    {%- if marttiphpbb_scssthemedev.errors -%}
+        <div class="panel" style="background: #faa; color: black;">
+        {%- for e in marttiphpbb_scssthemedev.errors -%}
+            <p>{{- e -}}</p>
+        {%- endfor -%}
+        </div>
+    {%- endif -%}
     <form method="post">
     <label>{{- lang('MARTTIPHPBB_SCSSTHEMEDEV_FILE') -}}{{- lang('COLON') }}
     <select name="marttiphpbb_scssthemedev_file" id="marttiphpbb_scssthemedev_file">

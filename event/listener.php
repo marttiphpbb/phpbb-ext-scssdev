@@ -36,6 +36,7 @@ class listener implements EventSubscriberInterface
 	protected $content;
 	protected $file;
 	protected $crc;
+	protected $errors = [];
 	protected $page_header_en;
 
 	public function __construct(
@@ -135,6 +136,7 @@ class listener implements EventSubscriberInterface
 				{
 					$err = $e->getMessage();
 					error_log($err);
+					$this->errors[] = $err;
 					$content_compiled = '';
 				}
 
@@ -190,6 +192,7 @@ class listener implements EventSubscriberInterface
 			'file'		=> $this->file,
 			'content'	=> $this->content,
 			'version'	=> $this->crc,
+			'errors'	=> $this->errors,
 		];
 
 		$event['context'] = $context;
