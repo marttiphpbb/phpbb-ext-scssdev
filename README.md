@@ -1,6 +1,6 @@
 # phpBB 3.2 PhpBB Extension - marttiphpbb Scss Dev
 
-[Topic on phpBB.com](https://www.phpbb.com/community/viewtopic.php?f=456)
+[Topic on phpBB.com](https://www.phpbb.com/community/viewtopic.php?f=456&t=2492276)
 
 ![Edit A](doc/edit_a.png)
 
