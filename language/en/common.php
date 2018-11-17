@@ -20,6 +20,8 @@ $lang = array_merge($lang, [
 
 	'MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_CREATED'
 		=> 'The file %s could not be created.',
+	'MARTTIPHPBB_SCSSTHEMEDEV_FILE_EXISTS'
+		=> 'The file %s exists already.',
 	'MARTTIPHPBB_SCSSTHEMEDEV_FILE_DOES_NOT_EXIST'
 		=> 'The file %s does not exist.',
 	'MARTTIPHPBB_SCSSTHEMEDEV_FILE_NOT_DELETED'

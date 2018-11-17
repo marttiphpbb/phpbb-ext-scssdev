@@ -4,12 +4,12 @@ services:
         arguments:
             - '@language'
             - '@user'
+            - '@config'
             - '@auth'
             - '@request'
             - '@template.twig.loader'
             - '@ext.manager'
             - '@service_container'
             - '%core.root_path%'
-            - '%core.php_ext%'
         tags:
             - { name: event.listener }

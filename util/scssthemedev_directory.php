@@ -15,8 +15,6 @@ class scssthemedev_directory
 	protected $phpbb_root_path;
 	protected $language;
 
-	const HTACCESS = "<Files *>\r\n    Order Allow, Deny\r\n    Deny from All\r\n</Files>";
-
 	public function __construct(
 		language $language,
 		string $phpbb_root_path
@@ -78,9 +76,15 @@ class scssthemedev_directory
 	{
 		$ret = [];
 		$files = $this->get_filenames();
+		$dir = $this->phpbb_root_path . cnst::DIR . '/';
 
 		foreach($files as $f)
 		{
+			if (filetype($dir . $f) === 'dir')
+			{
+				continue;
+			}
+
 			if (pathinfo($f, PATHINFO_EXTENSION) === 'scss')
 			{
 				$ret[] = pathinfo($f, PATHINFO_FILENAME);
@@ -119,15 +123,6 @@ class scssthemedev_directory
 					cnst::L . '_DIRECTORY_NOT_CREATED'),
 					cnst::DIR), E_USER_WARNING);
 			}
-		}
-
-		$filename = $dir . '/.htaccess';
-
-		if (@file_put_contents($filename, self::HTACCESS) === false)
-		{
-			trigger_error(sprintf($this->language->lang(
-				cnst::L . '_FILE_WRITE_FAIL'),
-				$filename), E_USER_WARNING);
 		}
 	}
 
@@ -170,7 +165,7 @@ class scssthemedev_directory
 					$object), E_USER_WARNING);
 			}
 
-			if ($filetype == 'dir')
+			if ($filetype === 'dir')
 			{
 				$this->remove_directory($object);
 			}
