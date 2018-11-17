@@ -7,7 +7,7 @@
         </div>
     {%- endif -%}
     <form method="post">
-    <label>{{- lang('MARTTIPHPBB_SCSSDEV_FILE') -}}{{- lang('COLON') }}
+    <label style="background: white; color: black;">{{- lang('MARTTIPHPBB_SCSSDEV_FILE') -}}{{- lang('COLON') }}
     <select name="marttiphpbb_scssdev_file" id="marttiphpbb_scssdev_file">
         <option value=""{%- if not marttiphpbb_scssdev.file %} selected{%- endif -%}>** {{ lang('MARTTIPHPBB_SCSSDEV_NONE') }} **</option>
         {%- for f in marttiphpbb_scssdev.files -%}
@@ -15,7 +15,7 @@
         {%- endfor -%}
     </select>
     </label>
-    <label>{{- lang('MARTTIPHPBB_SCSSDEV_NEW_FILE') -}}{{- lang('COLON') }}
+    <label style="background: white; color: black;">{{- lang('MARTTIPHPBB_SCSSDEV_NEW_FILE') -}}{{- lang('COLON') }}
         <input type="text" name="marttiphpbb_scssdev_new" value="">
     </label>
     <textarea name="marttiphpbb_scssdev_content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
