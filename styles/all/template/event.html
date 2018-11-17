@@ -1,9 +1,0 @@
-{%- if marttiphpbb_scssdev.show_events -%}
-    <a class="scssdev-event" href="{{- marttiphpbb_scssdev.u_edit_events[block('event_name')] -}}" title="{{- lang('MARTTIPHPBB_SCSSDEV_LINK_EDIT_TITLE') -}}">
-        {%- block event_name -%}{%- endblock -%}
-    </a>
-{%- endif -%}
-
-{%- if MARTTIPHPBB_SCSSDEV_PATH -%}
-    {%- include MARTTIPHPBB_SCSSDEV_PATH ~ block('event_name') ~ '.html' -%} 
-{%- endif -%}
