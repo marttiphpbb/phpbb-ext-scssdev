@@ -23,7 +23,7 @@
 	"extra": {
 		"display-name": "Scss Dev",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.3"
+			"phpbb/phpbb": ">=3.2.7"
 		},
 		"version-check": {
 			"host": "marttiphpbb.github.io",

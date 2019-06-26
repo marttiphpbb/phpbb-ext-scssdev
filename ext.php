@@ -18,7 +18,7 @@ class ext extends base
 	public function is_enableable()
 	{
 		$config = $this->container->get('config');
-		return phpbb_version_compare($config['version'], '3.2.3', '>=') && version_compare(PHP_VERSION, '7.1', '>=');
+		return phpbb_version_compare($config['version'], '3.2.7', '>=') && version_compare(PHP_VERSION, '7.1', '>=');
 	}
 
 	function enable_step($old_state)
