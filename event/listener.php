@@ -90,6 +90,8 @@ class listener implements EventSubscriberInterface
 		$select_file = $this->request->variable('marttiphpbb_scssdev_file', '');
 		$new_file = $this->request->variable('marttiphpbb_scssdev_new', '');
 
+		error_log(json_encode(['submit' => $submit]));
+
 		if ($submit)
 		{
 			if ($new_file)
