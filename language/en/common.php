@@ -44,8 +44,12 @@ $lang = array_merge($lang, [
 		=> 'Failed to list content of directory %s',
 	'MARTTIPHPBB_SCSSDEV_PROCESS_AND_SAVE'
 		=> 'Process and Save',
+	'MARTTIPHPBB_SCSSDEV_MINIFY'
+		=> 'Minify',
 	'MARTTIPHPBB_SCSSDEV_NONE'
 		=> 'None',
+	'MARTTIPHPBB_SCSSDEV_PROSILVER'
+		=> 'Prosilver',
 	'MARTTIPHPBB_SCSSDEV_FILE'
 		=> 'File',
 	'MARTTIPHPBB_SCSSDEV_NEW_FILE'

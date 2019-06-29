@@ -12,9 +12,6 @@ use marttiphpbb\scssdev\util\scssdev_directory;
 
 class ext extends base
 {
-	/**
-	 * phpBB 3.2.3+ and PHP 7.1+
-	 */
 	public function is_enableable()
 	{
 		$config = $this->container->get('config');
