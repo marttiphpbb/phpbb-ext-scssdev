@@ -9,7 +9,6 @@
     <form method="post">
     <label style="background: white; color: black;">{{- lang('MARTTIPHPBB_SCSSDEV_FILE') -}}{{- lang('COLON') }}
     <select name="marttiphpbb_scssdev_file" id="marttiphpbb_scssdev_file">
-        <option value=""{%- if not marttiphpbb_scssdev.file %} selected{%- endif -%}>** {{ lang('MARTTIPHPBB_SCSSDEV_PROSILVER') }} **</option>
         {%- for f in marttiphpbb_scssdev.files -%}
             <option value="{{- f -}}"{%- if marttiphpbb_scssdev.file == f %} selected{%- endif -%}>{{- f -}}.scss</option>
         {%- endfor -%}
@@ -21,7 +20,7 @@
     <textarea name="marttiphpbb_scssdev_content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
         {{- marttiphpbb_scssdev.content -}}
     </textarea>
-    <input type="submit" name="marttiphpbb_scssdev_process" id="marttiphpbb_scssdev_save" value="{{- lang('MARTTIPHPBB_SCSSDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
+    <input type="submit" name="marttiphpbb_scssdev_save" id="marttiphpbb_scssdev_save" value="{{- lang('MARTTIPHPBB_SCSSDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
     &nbsp;
     <input type="button" name="marttiphpbb_scssdev_minify" id="marttiphpbb_scssdev_minify" value="{{- lang('MARTTIPHPBB_SCSSDEV_MINIFY') -}}" class="button1 default-submit-action">
     </form>

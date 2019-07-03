@@ -41,6 +41,12 @@ class scssdev_directory
 		}
 	}
 
+	public function write_prosilver_template():void
+	{
+		$this->save_to_file('prosilver.scss', cnst::PROSILVER_TEMPLATE);
+		$this->save_to_file('prosilver.css', cnst::PROSILVER_TEMPLATE);
+	}
+
 	public function save_to_file(string $filename, string $data):void
 	{
 		if (!($f = @fopen($this->phpbb_root_path . cnst::DIR . '/' . $filename, 'wb')))
@@ -108,10 +114,14 @@ class scssdev_directory
 		return array_diff($list, ['.', '..', '.htaccess']);
 	}
 
-	public function create()
+	public function create():void
 	{
 		$dir = $this->phpbb_root_path . cnst::DIR;
+		$this->create_directory($dir);
+	}
 
+	public function create_directory(string $dir):void
+	{
 		if (!file_exists($dir))
 		{
 			@mkdir($dir, 0777, true);
@@ -121,17 +131,17 @@ class scssdev_directory
 			{
 				trigger_error(sprintf($this->language->lang(
 					cnst::L . '_DIRECTORY_NOT_CREATED'),
-					cnst::DIR), E_USER_WARNING);
+					$dir), E_USER_WARNING);
 			}
 		}
 	}
 
-	public function remove()
+	public function remove():void
 	{
 		$this->remove_directory($this->phpbb_root_path . cnst::DIR);
 	}
 
-	private function remove_directory(string $dir)
+	private function remove_directory(string $dir):void
 	{
 		if(!is_dir($dir))
 		{

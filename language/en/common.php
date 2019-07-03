@@ -17,7 +17,8 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
-
+	'MARTTIPHPBB_SCSSDEV_NO_FILENAME'
+		=> 'No filename was defined.',
 	'MARTTIPHPBB_SCSSDEV_FILE_NOT_CREATED'
 		=> 'The file %s could not be created.',
 	'MARTTIPHPBB_SCSSDEV_FILE_EXISTS'
@@ -48,8 +49,6 @@ $lang = array_merge($lang, [
 		=> 'Minify',
 	'MARTTIPHPBB_SCSSDEV_NONE'
 		=> 'None',
-	'MARTTIPHPBB_SCSSDEV_PROSILVER'
-		=> 'Prosilver',
 	'MARTTIPHPBB_SCSSDEV_FILE'
 		=> 'File',
 	'MARTTIPHPBB_SCSSDEV_NEW_FILE'

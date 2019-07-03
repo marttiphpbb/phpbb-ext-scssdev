@@ -22,6 +22,7 @@ use marttiphpbb\scssdev\util\cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Leafo\ScssPhp\Compiler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use MatthiasMullie\Minify;
 
 class listener implements EventSubscriberInterface
 {
@@ -53,7 +54,8 @@ class listener implements EventSubscriberInterface
 		ext_manager $ext_manager,
 		ContainerInterface $container,
 		string $phpbb_root_path
-	) {
+	)
+	{
 		$this->language = $language;
 		$this->user = $user;
 		$this->config = $config;
@@ -93,20 +95,20 @@ class listener implements EventSubscriberInterface
 		$this->scssdev_directory = new scssdev_directory($this->language, $this->phpbb_root_path);
 
 		$cookie_name = $this->config['cookie_name'];
-		$file = $this->request->variable($cookie_name . '_marttiphpbb_scssdev_file', '', false, \phpbb\request\request_interface::COOKIE);
-		$crc = $this->request->variable($cookie_name . '_marttiphpbb_scssdev_crc', '', false, \phpbb\request\request_interface::COOKIE);
+		$file = $this->request->variable($cookie_name . '_' . cnst::ID . '_file', '', false, \phpbb\request\request_interface::COOKIE);
+		$crc = $this->request->variable($cookie_name . '_' . cnst::ID . '_crc', '', false, \phpbb\request\request_interface::COOKIE);
 
-		$submit_save = $this->request->is_set_post('marttiphpbb_scssdev_save');
-		$submit_minify = $this->request->is_set_post('marttiphpbb_scssdev_minify');
-		$select_file = $this->request->variable('marttiphpbb_scssdev_file', '');
-		$new_file = $this->request->variable('marttiphpbb_scssdev_new', '');
+		$submit_save = $this->request->is_set_post(cnst::ID . '_save');
+		$submit_minify = $this->request->is_set_post(cnst::ID . '_minify');
+		$select_file = $this->request->variable(cnst::ID . '_file', 'prosilver');
+		$new_file = $this->request->variable(cnst::ID . '_new', '');
 
 		error_log(json_encode([
 			'submit_save' => $submit_save,
 			'submit_minify' => $submit_minify,
 		]));
 
-		if ($submit_save)
+		if ($submit_save || $submit_minify)
 		{
 			if ($new_file)
 			{
@@ -125,11 +127,8 @@ class listener implements EventSubscriberInterface
 				$file = $new_file;
 				$process_and_save_file = true;
 			}
-			else if ($select_file === '')
-			{
-				$file = $crc = $this->content = '';
-			}
-			else if ($select_file === $file)
+			else if ($select_file === $file
+				&& $file !== 'prosilver')
 			{
 				$process_and_save_file = true;
 			}
@@ -142,7 +141,7 @@ class listener implements EventSubscriberInterface
 
 			if (isset($process_and_save_file) && $process_and_save_file)
 			{
-				$content = $this->request->variable('marttiphpbb_scssdev_content', '', true);
+				$content = $this->request->variable(cnst::ID . '_content', '', true);
 				$content = utf8_normalize_nfc($content);
 				$this->content = htmlspecialchars_decode($content);
 				$this->scssdev_directory->save_to_file($file . '.scss', $this->content);
@@ -163,8 +162,13 @@ class listener implements EventSubscriberInterface
 				$crc = crc32($this->content);
 			}
 
-			$this->user->set_cookie('marttiphpbb_scssdev_file', $file, 0);
-			$this->user->set_cookie('marttiphpbb_scssdev_crc', $crc, 0);
+			if ($submit_minify)
+			{
+
+			}
+
+			$this->user->set_cookie(cnst::ID . '_file', $file, 0);
+			$this->user->set_cookie(cnst::ID . '_crc', $crc, 0);
 		}
 		else if (
 			$file
@@ -177,7 +181,7 @@ class listener implements EventSubscriberInterface
 		else
 		{
 			$this->content = cnst::PROSILVER_TEMPLATE;
-			$file = '';
+			$file = 'prosilver';
 		}
 
 		$this->file = $file;
@@ -202,9 +206,6 @@ class listener implements EventSubscriberInterface
 
 		$context = $event['context'];
 
-		error_log($context['$STYLESHEETS']);
-
-
 		if (!isset($this->page_header_en))
 		{
 			return;
@@ -217,7 +218,9 @@ class listener implements EventSubscriberInterface
 
 		$context = $event['context'];
 
-		$context['marttiphpbb_scssdev'] = [
+		$context['T_STYLESHEET_LINK'] = cnst::PATH . $this->file . '.css?' . $this->crc;
+
+		$context[cnst::ID] = [
 			'enable'	=> true,
 			'path'		=> cnst::PATH,
 			'files'		=> $this->scssdev_directory->get_scss_filenames(),
