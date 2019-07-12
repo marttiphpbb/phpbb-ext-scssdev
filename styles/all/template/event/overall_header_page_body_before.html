@@ -15,17 +15,18 @@
     </select>
     </label>
     <label style="background: white; color: black;">{{- lang('MARTTIPHPBB_SCSSDEV_NEW_FILE') -}}{{- lang('COLON') }}
-        <input type="text" name="marttiphpbb_scssdev_new" value="">
+        <input type="text" name="marttiphpbb_scssdev_new" value="" size="10" style="width: 10em;">
     </label>
     <textarea name="marttiphpbb_scssdev_content"{{- marttiphpbb_codemirror.data_attr ?? '' -}}>
         {{- marttiphpbb_scssdev.content -}}
     </textarea>
     <input type="submit" name="marttiphpbb_scssdev_save" id="marttiphpbb_scssdev_save" value="{{- lang('MARTTIPHPBB_SCSSDEV_PROCESS_AND_SAVE') -}}" class="button1 default-submit-action">
     &nbsp;
-    <input type="button" name="marttiphpbb_scssdev_minify" id="marttiphpbb_scssdev_minify" value="{{- lang('MARTTIPHPBB_SCSSDEV_MINIFY') -}}" class="button1 default-submit-action">
+    <input type="submit" name="marttiphpbb_scssdev_minify" value="{{- lang('MARTTIPHPBB_SCSSDEV_MINIFY') -}}" class="button1">
+    &nbsp;
+    <label style="background: white; color: black;">{{- lang('MARTTIPHPBB_SCSSDEV_SIZE_THRESHOLD') -}}{{- lang('COLON') }}
+        <input type="number" name="marttiphpbb_scssdev_size_threshold" id="marttiphpbb_scssdev_size_threshold" value="{{- marttiphpbb_scssdev.size_threshold -}}" style="width: 3em;" min="0">
+    </label>
     </form>
-    {%- if marttiphpbb_scssdev.file -%}
-        {%- INCLUDECSS marttiphpbb_scssdev.path ~ marttiphpbb_scssdev.file ~ '.css?v=' ~ marttiphpbb_scssdev.version -%}
-    {%- endif -%}
     {%- INCLUDEJS '@marttiphpbb_scssdev/scssdev.js' -%}
 {%- endif -%}

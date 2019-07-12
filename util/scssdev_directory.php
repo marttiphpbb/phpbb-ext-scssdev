@@ -28,12 +28,12 @@ class scssdev_directory
 
 	public function file_exists(string $filename):bool
 	{
-		return file_exists($this->phpbb_root_path . cnst::DIR . '/' . $filename);
+		return file_exists($this->get_path($filename));
 	}
 
 	public function create_file(string $filename):void
 	{
-		if (!@touch($this->phpbb_root_path . cnst::DIR . '/' . $filename))
+		if (!@touch($this->get_path($filename)))
 		{
 			trigger_error(sprintf($this->language->lang(
 				cnst::L . '_FILE_NOT_CREATED'),
@@ -47,9 +47,19 @@ class scssdev_directory
 		$this->save_to_file('prosilver.css', cnst::PROSILVER_TEMPLATE);
 	}
 
+	public function get_dir():string
+	{
+		return $this->phpbb_root_path . cnst::DIR;
+	}
+
+	public function get_path(string $filename):string
+	{
+		return $this->get_dir() . '/' . $filename;
+	}
+
 	public function save_to_file(string $filename, string $data):void
 	{
-		if (!($f = @fopen($this->phpbb_root_path . cnst::DIR . '/' . $filename, 'wb')))
+		if (!($f = @fopen($this->get_path($filename), 'wb')))
 		{
 			trigger_error(sprintf($this->language->lang(
 				cnst::L . '_FILE_NOT_OPENED'),
@@ -68,7 +78,7 @@ class scssdev_directory
 
 	public function file_get_contents(string $filename):string
 	{
-		$content = @file_get_contents($this->phpbb_root_path . cnst::DIR . '/' . $filename);
+		$content = @file_get_contents($this->get_path($filename));
 
 		if ($content === false)
 		{
@@ -82,11 +92,10 @@ class scssdev_directory
 	{
 		$ret = [];
 		$files = $this->get_filenames();
-		$dir = $this->phpbb_root_path . cnst::DIR . '/';
 
 		foreach($files as $f)
 		{
-			if (filetype($dir . $f) === 'dir')
+			if (filetype($this->get_path($f)) === 'dir')
 			{
 				continue;
 			}
@@ -102,7 +111,7 @@ class scssdev_directory
 
 	public function get_filenames():array
 	{
-		$list = @scandir($this->phpbb_root_path . cnst::DIR);
+		$list = @scandir($this->get_dir());
 
 		if ($list === false)
 		{
@@ -116,8 +125,7 @@ class scssdev_directory
 
 	public function create():void
 	{
-		$dir = $this->phpbb_root_path . cnst::DIR;
-		$this->create_directory($dir);
+		$this->create_directory($this->get_dir());
 	}
 
 	public function create_directory(string $dir):void
@@ -138,7 +146,7 @@ class scssdev_directory
 
 	public function remove():void
 	{
-		$this->remove_directory($this->phpbb_root_path . cnst::DIR);
+		$this->remove_directory($this->get_dir());
 	}
 
 	private function remove_directory(string $dir):void

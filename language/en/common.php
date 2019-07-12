@@ -53,4 +53,6 @@ $lang = array_merge($lang, [
 		=> 'File',
 	'MARTTIPHPBB_SCSSDEV_NEW_FILE'
 		=> 'New File (leave out .scss extension)',
+	'MARTTIPHPBB_SCSSDEV_SIZE_THRESHOLD'
+		=> 'Embed images below kB',
 ]);

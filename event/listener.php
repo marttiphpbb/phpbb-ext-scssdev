@@ -14,7 +14,6 @@ use phpbb\config\config;
 use phpbb\request\request;
 use phpbb\user;
 use phpbb\language\language;
-use phpbb\template\twig\loader;
 use phpbb\extension\manager as ext_manager;
 use phpbb\request\request_interface;
 use marttiphpbb\scssdev\util\scssdev_directory;
@@ -30,7 +29,6 @@ class listener implements EventSubscriberInterface
 	protected $user;
 	protected $request;
 	protected $language;
-	protected $loader;
 	protected $ext_manager;
 	protected $container;
 	protected $phpbb_root_path;
@@ -42,7 +40,9 @@ class listener implements EventSubscriberInterface
 	protected $errors = [];
 	protected $page_header_en;
 
-	protected $disabled;
+	protected $minified;
+	protected $scssdev_param;
+	protected $size_threshold;
 
 	public function __construct(
 		language $language,
@@ -50,7 +50,6 @@ class listener implements EventSubscriberInterface
 		config $config,
 		auth $auth,
 		request $request,
-		loader $loader,
 		ext_manager $ext_manager,
 		ContainerInterface $container,
 		string $phpbb_root_path
@@ -61,7 +60,6 @@ class listener implements EventSubscriberInterface
 		$this->config = $config;
 		$this->auth = $auth;
 		$this->request = $request;
-		$this->loader = $loader;
 		$this->ext_manager = $ext_manager;
 		$this->container = $container;
 		$this->phpbb_root_path = $phpbb_root_path;
@@ -84,9 +82,9 @@ class listener implements EventSubscriberInterface
 			return;
 		}
 
-		$this->disabled = $this->request->is_set('scssdev_disable', request_interface::GET);
+		$this->scssdev_param = $this->request->is_set('scssdev', request_interface::GET);
 
-		if ($this->disabled)
+		if ($this->scssdev_param)
 		{
 			return;
 		}
@@ -102,6 +100,7 @@ class listener implements EventSubscriberInterface
 		$submit_minify = $this->request->is_set_post(cnst::ID . '_minify');
 		$select_file = $this->request->variable(cnst::ID . '_file', 'prosilver');
 		$new_file = $this->request->variable(cnst::ID . '_new', '');
+		$this->size_threshold = $this->request->variable(cnst::ID . '_size_threshold', 5);
 
 		error_log(json_encode([
 			'submit_save' => $submit_save,
@@ -164,7 +163,13 @@ class listener implements EventSubscriberInterface
 
 			if ($submit_minify)
 			{
-
+				$source_path = __DIR__ . '/../../../../' . cnst::DIR . '/' . $file . '.css';
+				error_log('source path: ' . $source_path);
+				$minifier = new Minify\CSS($source_path);
+				$minifier->setMaxImportSize($this->size_threshold);
+				$destination_path = $this->scssdev_directory->get_path($file . '.min.css');
+				$minifier->minify($destination_path);
+				$this->minified = true;
 			}
 
 			$this->user->set_cookie(cnst::ID . '_file', $file, 0);
@@ -188,8 +193,6 @@ class listener implements EventSubscriberInterface
 		$this->crc = $crc;
 		$this->page_header_en = true;
 
-		$this->loader->addSafeDirectory($this->phpbb_root_path . cnst::DIR);
-
 		if ($this->ext_manager->is_enabled('marttiphpbb/codemirror'))
 		{
 			$load = $this->container->get('marttiphpbb.codemirror.load');
@@ -211,23 +214,29 @@ class listener implements EventSubscriberInterface
 			return;
 		}
 
-		if ($this->disabled)
+		if ($this->scssdev_param)
 		{
 			return;
 		}
 
 		$context = $event['context'];
 
-		$context['T_STYLESHEET_LINK'] = cnst::PATH . $this->file . '.css?' . $this->crc;
+		if (isset($this->minified))
+		{
+			$context['T_STYLESHEET_LINK'] = cnst::PATH . $this->file . '.min.css?' . $this->crc;
+		}
+		else
+		{
+			$context['T_STYLESHEET_LINK'] = cnst::PATH . $this->file . '.css?' . $this->crc;
+		}
 
 		$context[cnst::ID] = [
-			'enable'	=> true,
-			'path'		=> cnst::PATH,
-			'files'		=> $this->scssdev_directory->get_scss_filenames(),
-			'file'		=> $this->file,
-			'content'	=> $this->content,
-			'version'	=> $this->crc,
-			'errors'	=> $this->errors,
+			'enable'			=> true,
+			'files'				=> $this->scssdev_directory->get_scss_filenames(),
+			'file'				=> $this->file,
+			'content'			=> $this->content,
+			'errors'			=> $this->errors,
+			'size_threshold'	=> $this->size_threshold,
 		];
 
 		$event['context'] = $context;

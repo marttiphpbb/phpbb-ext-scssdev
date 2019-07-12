@@ -7,7 +7,6 @@ services:
             - '@config'
             - '@auth'
             - '@request'
-            - '@template.twig.loader'
             - '@ext.manager'
             - '@service_container'
             - '%core.root_path%'
