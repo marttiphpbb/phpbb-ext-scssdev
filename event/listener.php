@@ -65,7 +65,7 @@ class listener implements EventSubscriberInterface
 		$this->phpbb_root_path = $phpbb_root_path;
 	}
 
-	static public function getSubscribedEvents()
+	static public function getSubscribedEvents():array
 	{
 		return [
 			'core.page_header'
@@ -75,7 +75,7 @@ class listener implements EventSubscriberInterface
 		];
 	}
 
-	public function core_page_header(event $event)
+	public function core_page_header(event $event):void
 	{
 		if (!$this->auth->acl_get('a_'))
 		{
@@ -200,7 +200,7 @@ class listener implements EventSubscriberInterface
 		}
 	}
 
-	public function core_twig_environment_render_template_before(event $event)
+	public function core_twig_environment_render_template_before(event $event):void
 	{
 		if (!$this->auth->acl_get('a_'))
 		{
