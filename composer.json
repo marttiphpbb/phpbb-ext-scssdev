@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Scss Dev Extension for phpBB 3.3",
 	"homepage": "https://github.com/marttiphpbb/phpbb-ext-scssdev",
-	"version": "0.3.0",
-	"time": "2019-06-26",
+	"version": "0.4.0",
+	"time": "2020-04-14",
 	"keywords": ["phpbb", "extension", "template", "custom"],
 	"license": "GPL-2.0-only",
 	"authors": [{
