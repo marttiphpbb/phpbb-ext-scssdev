@@ -11,7 +11,7 @@
 * phpBB 3.3+
 * PHP 7.1+
 * The [Codemirror helper extension](https://github.com/marttiphpbb/phpbb-ext-codemirror)
-* Run `composer update` in order to install the [leafo/scssphp](http://leafo.github.io/scssphp/) scss compiler.
+* Run `composer update` in order to install the [scssphp/scssphp](http://scssphp.github.io/scssphp/) scss compiler.
 
 ## Quick Install
 

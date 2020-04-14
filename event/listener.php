@@ -19,7 +19,7 @@ use phpbb\request\request_interface;
 use marttiphpbb\scssdev\util\scssdev_directory;
 use marttiphpbb\scssdev\util\cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Leafo\ScssPhp\Compiler;
+use ScssPhp\ScssPhp\Compiler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use MatthiasMullie\Minify;
 
