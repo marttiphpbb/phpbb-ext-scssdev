@@ -1,4 +1,4 @@
-# phpBB 3.2 PhpBB Extension - marttiphpbb Scss Dev
+# PhpBB Extension - marttiphpbb Scss Dev
 
 [Topic on phpBB.com](https://www.phpbb.com/community/viewtopic.php?f=456&t=2492276)
 
@@ -8,14 +8,14 @@
 
 ## Requirements
 
-* phpBB 3.2.7+
+* phpBB 3.3+
 * PHP 7.1+
 * The [Codemirror helper extension](https://github.com/marttiphpbb/phpbb-ext-codemirror)
 * Run `composer update` in order to install the [leafo/scssphp](http://leafo.github.io/scssphp/) scss compiler.
 
 ## Quick Install
 
-You can install this on the latest release of phpBB 3.2 by following the steps below:
+You can install this on the latest release of phpBB by following the steps below:
 
 * Create `marttiphpbb/scssdev` in the `ext` directory.
 * Download and unpack the repository into `ext/marttiphpbb/scssdev`
