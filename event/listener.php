@@ -230,6 +230,8 @@ class listener implements EventSubscriberInterface
 			$context['T_STYLESHEET_LINK'] = cnst::PATH . $this->file . '.css?' . $this->crc;
 		}
 
+		$context['T_STYLESHEET_LANG_LINK'] = cnst::PATH . $this->user->lang_name . '/' . $this->file . '.css?' . $this->crc;
+
 		$context[cnst::ID] = [
 			'enable'			=> true,
 			'files'				=> $this->scssdev_directory->get_scss_filenames(),
